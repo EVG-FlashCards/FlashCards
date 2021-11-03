@@ -44,6 +44,9 @@ function ciclosWeb() {
         document.body.style.backgroundColor = "#2e3440";
         document.querySelector("nav").style.backgroundColor = "#2e3440";
         document.querySelector("footer").style.backgroundColor = "#2e3440";
+
+        document.getElementById("btnNodes").src = "img/soon.png";
+
         let l = document.getElementsByTagNameNS("http://www.w3.org/2000/svg", "path")[1].setAttribute("fill","#373d4c");
         console.log(l);
         darkMode = false;
@@ -52,6 +55,9 @@ function ciclosWeb() {
         document.body.style.backgroundColor = "white";
         document.querySelector("nav").style.backgroundColor = "#eceff4";
         document.querySelector("footer").style.backgroundColor = "#eceff4";
+
+        document.getElementById("btnNodes").src = "img/soon.png";
+
         let l = document.getElementsByTagNameNS("http://www.w3.org/2000/svg", "path")[1].setAttribute("fill","white");
         darkMode = true;
     }
