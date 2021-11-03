@@ -22,7 +22,7 @@ body {
 */
 
 nav {
-    background-color: white;
+    background-color: #eceff4;
     width: 100%;
     height: 100px;
     display: flex;
@@ -41,6 +41,14 @@ nav a:hover{
     color: white;
 }
 
+/*
+    Modos día/noche
+*/
+#modes {
+    float: right;
+}
+
+
 /*  
     ========================================================
                 ==   Sección MAIN       ==
@@ -48,6 +56,7 @@ nav a:hover{
 */
 
 main {
+    clear: right;
     background-color: aquamarine;
 }
 
@@ -111,4 +120,9 @@ main {
 footer {
     background-color: #f4f6f9;
     text-align: center;
+}
+
+footer svg {
+    width: 100%;
+    height: 110px;
 }

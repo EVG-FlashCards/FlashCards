@@ -5,13 +5,21 @@
 
 'use strict';
 
+//Variables
+let darkMode = true;
+
 console.log("Cargando...");
+
+//poner aquí la función de inicio onload.
+
+//window.onload = this.inicio.bind(this);
 
 //Ejemplo de botones
 document.getElementById("desc").onclick = clicks;
 document.getElementById("phonetics").onclick = clicks;
 document.getElementById("btnCorrect").onclick = clicks;
 document.getElementById("btnIncorrect").onclick = clicks;
+document.getElementById("btnNodes").onclick = clicks;
 
 
 /**
@@ -20,4 +28,31 @@ document.getElementById("btnIncorrect").onclick = clicks;
  */
 function clicks(event) {
     console.log("Has hecho click en "+event.target.innerText);
+
+    //console.log(event);
+    if(event.target.id == "btnNodes") {
+        ciclosWeb();
+    }
+}
+
+
+/**
+ * Función para controlar el tema de la página en modo día ó noche.
+ */
+function ciclosWeb() {
+    if(darkMode) {
+        document.body.style.backgroundColor = "#2e3440";
+        document.querySelector("nav").style.backgroundColor = "#2e3440";
+        document.querySelector("footer").style.backgroundColor = "#2e3440";
+        let l = document.getElementsByTagNameNS("http://www.w3.org/2000/svg", "path")[1].setAttribute("fill","#373d4c");
+        console.log(l);
+        darkMode = false;
+    }
+    else {
+        document.body.style.backgroundColor = "white";
+        document.querySelector("nav").style.backgroundColor = "#eceff4";
+        document.querySelector("footer").style.backgroundColor = "#eceff4";
+        let l = document.getElementsByTagNameNS("http://www.w3.org/2000/svg", "path")[1].setAttribute("fill","white");
+        darkMode = true;
+    }
 }
