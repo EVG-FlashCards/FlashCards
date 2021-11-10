@@ -1,5 +1,71 @@
 {
 
-    "Preguntas":["Dog", "Cat", "Horse", "Lizard", "Tiger"]
+    "Preguntas":[
+        {
+            "img": "horse.png",
+            "desc": "Horse"
+        },
+        {
+            "img": "cat.png",
+            "desc": "Cat"
+        },
+        {
+            "img": "dog.jpg",
+            "desc": "Dog"
+        },
+        {
+            "img": "lizard.jpg",
+            "desc": "Lizard"
+        },
+        {
+            "img": "tiger.jpg",
+            "desc": "Tiger"
+        },
+        {
+            "img": "cow.jpg",
+            "desc": "Cow"
+        },
+        {
+            "img": "pig.jpg",
+            "desc": "Pig"
+        },
+        {
+            "img": "parrot.jpg",
+            "desc": "Parrot"
+        },
+        {
+            "img": "giraffe.jpg",
+            "desc": "Giraffe"
+        },
+        {
+            "img": "camel.jpg",
+            "desc": "Camel"
+        },
+        {
+            "img": "bull.jpg",
+            "desc": "Bull"
+        },
+        {
+            "img": "donkey.jpg",
+            "desc": "Donkey"
+        },
+        {
+            "img": "rabbit.jpg",
+            "desc": "Rabbit"
+        },
+        {
+            "img": "whale.jpg",
+            "desc": "Whale"
+        },
+        {
+            "img": "octopus.jpg",
+            "desc": "Octopus"
+        },
+        {
+            "img": "otter.jpg",
+            "desc": "Otter"
+        }
+
+    ]  
 
 }
