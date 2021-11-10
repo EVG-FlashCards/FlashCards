@@ -15,8 +15,11 @@ let idPregunta = 0;
 
 let team1Selected = null;
 
+let totalScore = document.getElementById("totalScore");
 let puntuacionT1 = 0;
 let puntuacionT2 = 0;
+
+//Al hacer click en Teams, se abrirá un pop up con la puntuación de ambos equipos y permitiendo cambiar el nombre de ambos.
 
 
 console.log("Cargando...");
@@ -121,45 +124,10 @@ function clicks(event) {
             document.querySelector("div#imgEDesc > img").style.display = "inline";
         }
     }
-    //Click en botón de correcto
-    if(event.target.id == "btnCorrect" ) {
-        console.log("Click en Correcto");
 
-        //Pasamos a la siguiente pregunta
-        idPregunta++;
-
-        console.log("Team: "+team1Selected);
-
-        if(team1Selected == null)
-            alert("Selecciona un equipo primero")
-
-        if(team1Selected)
-            puntuacionT1++;
-        else
-            puntuacionT2++;
-
-        console.log("Puntos:"+puntuacionT1 + " " + puntuacionT2);
-
-        //Ocultamos la imagen
-        document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
-    
-    }
-    //Click en botón de incorrecto
-    if(event.target.id == "btnIncorrect") {
-        console.log("Click en Correcto");
-
-        //Pasamos a la siguiente pregunta
-        idPregunta++;
-
-        if(team1Selected)
-            puntuacionT1--;
-        else
-            puntuacionT2--;
-
-        //Ocultamos la imagen
-        document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
-    
-    }
+    //Clicks en botones de correcto e incorrecto y equipos.
+    if(event.target.id == "btnCorrect" || event.target.id == "btnIncorrect") 
+        botonesCheck(event);
 
     //Clicks a equipos 1-2
     if(event.target.id == "team1") {
@@ -173,12 +141,81 @@ function clicks(event) {
     }
 }
 
+/**
+ * Función que controla los clicks en los botones de correcto/incorrecto
+ * @param {*} event 
+ */
+function botonesCheck(event) {
+
+    //Si no has seleccionado ningún equipo...
+    if(team1Selected == null) {
+        alert("[ERROR] Selecciona un equipo primero");
+    } else 
+    {
+        //Click en botón de correcto
+        if(event.target.id == "btnCorrect" ) {
+            console.log("Click en Correcto");
+
+            //Pasamos a la siguiente pregunta
+            idPregunta++;
+
+            sumarPuntos(true);
+
+            //Actualizamos los puntos totales
+            totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+
+            //console.log("Puntos:"+puntuacionT1 + " " + puntuacionT2);
+
+            //Ocultamos la imagen
+            document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
+        
+        }
+        //Click en botón de incorrecto
+        if(event.target.id == "btnIncorrect") {
+            console.log("Click en Correcto");
+
+            //Pasamos a la siguiente pregunta
+            idPregunta++;
+
+            
+            sumarPuntos(false);
+
+            //Actualizamos los puntos totales
+            totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+
+            //Ocultamos la imagen
+            document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
+        
+        }
+    }
+}
+
+/**
+ * Función que suma o resta las puntuaciones de un equipo si se les pasa un parametro.
+ * De lo contrario devuelve los puntos totales.
+ * @param {*} esSuma -> Indica si se va a sumar o a restar puntos
+ * @returns -> Devuelve la puntuación total (si no se le pasa ningún parametro)
+ */
+function sumarPuntos(esSuma = null) {
+    if(esSuma) {
+        if(team1Selected) puntuacionT1++;
+        else puntuacionT2++;
+    } else {
+        if(team1Selected) puntuacionT1--;
+        else puntuacionT2--;
+    }
+
+    if(esSuma == null) {
+        console.log("Entra: "+Math.abs(puntuacionT1+puntuacionT2));
+        //Devuelve la puntuación total.
+        return Math.abs(puntuacionT1+puntuacionT2);
+    }
+}
+
 
 /**
  * Función para controlar el tema de la página en modo día ó noche.
- */
-
-//hover
+*/
 function ciclosWeb() {
     if(darkMode) {
         document.body.style.backgroundColor = "#2e3440";
