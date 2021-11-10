@@ -74,7 +74,7 @@ function clicks(event) {
             pDescripcion.id = "pDescripcion";
 
             
-            pDescripcion.appendChild(document.createTextNode(stringJson.Preguntas[0]));
+            pDescripcion.appendChild(document.createTextNode(stringJson.Preguntas[0].desc));
 
             //obtener el div y metemos el parrafo dentro.
             document.getElementById("imgEDesc").appendChild(pDescripcion);
