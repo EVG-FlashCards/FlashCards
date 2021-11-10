@@ -12,7 +12,11 @@ let fonetica = false;
 let stringJson = null;
 let pDescripcion = "";
 let idPregunta = 0;
-let puntuacion = 0;
+
+let team1Selected = null;
+
+let puntuacionT1 = 0;
+let puntuacionT2 = 0;
 
 
 console.log("Cargando...");
@@ -27,6 +31,8 @@ document.getElementById("phonetics").onclick = clicks;
 document.getElementById("btnCorrect").onclick = clicks;
 document.getElementById("btnIncorrect").onclick = clicks;
 document.getElementById("btnNodes").onclick = clicks;
+document.getElementById("team1").onclick = clicks;
+document.getElementById("team2").onclick = clicks;
 
 
 
@@ -122,8 +128,17 @@ function clicks(event) {
         //Pasamos a la siguiente pregunta
         idPregunta++;
 
-        //Puntuacion temporal
-        puntuacion++;
+        console.log("Team: "+team1Selected);
+
+        if(team1Selected == null)
+            alert("Selecciona un equipo primero")
+
+        if(team1Selected)
+            puntuacionT1++;
+        else
+            puntuacionT2++;
+
+        console.log("Puntos:"+puntuacionT1 + " " + puntuacionT2);
 
         //Ocultamos la imagen
         document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
@@ -136,9 +151,25 @@ function clicks(event) {
         //Pasamos a la siguiente pregunta
         idPregunta++;
 
+        if(team1Selected)
+            puntuacionT1--;
+        else
+            puntuacionT2--;
+
         //Ocultamos la imagen
         document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
     
+    }
+
+    //Clicks a equipos 1-2
+    if(event.target.id == "team1") {
+        //Establece que estás jugando como principal en el equipo 1
+        team1Selected = true;        
+    }
+
+    if(event.target.id == "team2") {
+        //Establece que estás jugando como principal en el equipo 2
+        team1Selected = false;
     }
 }
 
