@@ -23,7 +23,7 @@ body {
 */
 
 nav {
-    background-color: white;
+    background-color: #ECEFF4;
     width: 100%;
     height: 100px;
     display: flex;
@@ -41,7 +41,7 @@ nav a {
 }
 nav a:hover{
     transition: 1s;
-    background-color: #ECEFF4;
+    background-color: #abafb4;
     border-radius: 10px;
 }
 
@@ -79,9 +79,9 @@ main {
 }
 
 #pnlImagen img {
-    width: 100px;
+    width: 100%;
     height: 200px;
-    margin: 20px 50px 20px 50px;
+    /*margin: 20px 50px 20px 50px;*/
 }
 
 /*  
@@ -118,6 +118,15 @@ main {
 #btnIncorrect {
     background-color: red;
     color: white;
+}
+
+
+.toggleEquipos {
+    width: 100%;
+    padding: 25px;
+    background-color: #e5e5e5;
+    color: white;
+    font-size: 25px;
 }
 
 /*  

@@ -2,67 +2,67 @@
 
     "Preguntas":[
         {
-            "img": "horse.png",
+            "img": "img/Animales/horse.png",
             "desc": "Horse"
         },
         {
-            "img": "cat.png",
+            "img": "img/Animales/cat.png",
             "desc": "Cat"
         },
         {
-            "img": "dog.jpg",
+            "img": "img/Animales/dog.jpg",
             "desc": "Dog"
         },
         {
-            "img": "lizard.jpg",
+            "img": "img/Animales/lizard.jpg",
             "desc": "Lizard"
         },
         {
-            "img": "tiger.jpg",
+            "img": "img/Animales/tiger.jpg",
             "desc": "Tiger"
         },
         {
-            "img": "cow.jpg",
+            "img": "img/Animales/cow.jpg",
             "desc": "Cow"
         },
         {
-            "img": "pig.jpg",
+            "img": "img/Animales/pig.jpg",
             "desc": "Pig"
         },
         {
-            "img": "parrot.jpg",
+            "img": "img/Animales/parrot.jpg",
             "desc": "Parrot"
         },
         {
-            "img": "giraffe.jpg",
+            "img": "img/Animales/giraffe.jpg",
             "desc": "Giraffe"
         },
         {
-            "img": "camel.jpg",
+            "img": "img/Animales/camel.jpg",
             "desc": "Camel"
         },
         {
-            "img": "bull.jpg",
+            "img": "img/Animales/bull.jpg",
             "desc": "Bull"
         },
         {
-            "img": "donkey.jpg",
+            "img": "img/Animales/donkey.jpg",
             "desc": "Donkey"
         },
         {
-            "img": "rabbit.jpg",
+            "img": "img/Animales/rabbit.jpg",
             "desc": "Rabbit"
         },
         {
-            "img": "whale.jpg",
+            "img": "img/Animales/whale.jpg",
             "desc": "Whale"
         },
         {
-            "img": "octopus.jpg",
+            "img": "img/Animales/octopus.jpg",
             "desc": "Octopus"
         },
         {
-            "img": "otter.jpg",
+            "img": "img/Animales/otter.jpg",
             "desc": "Otter"
         }
 

@@ -11,7 +11,8 @@ let desc = false;
 let fonetica = false;
 let stringJson = null;
 let pDescripcion = "";
-
+let idPregunta = 0;
+let puntuacion = 0;
 
 
 console.log("Cargando...");
@@ -33,13 +34,15 @@ window.onload = iniciar
 
 
 function iniciar() {
-    cargar()
+    cargar();
 }
 
 function cargar(){
     let getJson = fetch ('js/preguntas.json')
     .then(respuesta => respuesta.json())
     .then(preguntas => stringJson = preguntas)
+
+
 
     //let parser = JSON.parse(getJson);
 
@@ -74,7 +77,7 @@ function clicks(event) {
             pDescripcion.id = "pDescripcion";
 
             
-            pDescripcion.appendChild(document.createTextNode(stringJson.Preguntas[0].desc));
+            pDescripcion.appendChild(document.createTextNode(stringJson.Preguntas[idPregunta].desc));
 
             //obtener el div y metemos el parrafo dentro.
             document.getElementById("imgEDesc").appendChild(pDescripcion);
@@ -111,6 +114,31 @@ function clicks(event) {
             //Volvemos a mostrar la imagen anterior.
             document.querySelector("div#imgEDesc > img").style.display = "inline";
         }
+    }
+    //Click en botón de correcto
+    if(event.target.id == "btnCorrect" ) {
+        console.log("Click en Correcto");
+
+        //Pasamos a la siguiente pregunta
+        idPregunta++;
+
+        //Puntuacion temporal
+        puntuacion++;
+
+        //Ocultamos la imagen
+        document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
+    
+    }
+    //Click en botón de incorrecto
+    if(event.target.id == "btnIncorrect") {
+        console.log("Click en Correcto");
+
+        //Pasamos a la siguiente pregunta
+        idPregunta++;
+
+        //Ocultamos la imagen
+        document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
+    
     }
 }
 
