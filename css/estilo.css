@@ -39,10 +39,17 @@ nav a {
     text-decoration: none;
     font-size: 1.5em;
 }
+
 nav a:hover{
     transition: 1s;
     background-color: #abafb4;
     border-radius: 10px;
+}
+
+nav button img {
+    border: 0;
+    width: 30px;
+    height: 30px;
 }
 
 /*
@@ -80,7 +87,9 @@ main {
 
 #pnlImagen img {
     width: 100%;
-    height: 200px;
+    height: 250px;
+    border-radius: 12px;
+
     /*margin: 20px 50px 20px 50px;*/
 }
 
@@ -137,7 +146,7 @@ main {
 */
 
 footer {
-    background-color: #f4f6f9;
+    background-color: #eceff4;
     text-align: center;
     position: absolute;
     width: 100%;
