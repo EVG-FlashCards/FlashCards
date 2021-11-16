@@ -20,6 +20,9 @@ let totalScore = document.getElementById("totalScore");
 let puntuacionT1 = 0;
 let puntuacionT2 = 0;
 
+
+
+
 //Al hacer click en Teams, se abrirá un pop up con la puntuación de ambos equipos y permitiendo cambiar el nombre de ambos.
 
 
@@ -60,6 +63,7 @@ function cargar() {
     document.getElementById("team1").onclick = clicks;
     document.getElementById("team2").onclick = clicks;
 
+
 }
 
 /**
@@ -73,6 +77,7 @@ function clicks(event) {
     if(event.target.id == "btnNodes") {
         ciclosWeb();
     }
+    
 
     //Click en botón de descripción
     if(event.target.id == "desc") {
@@ -136,12 +141,19 @@ function clicks(event) {
     //Clicks a equipos 1-2
     if(event.target.id == "team1") {
         //Establece que estás jugando como principal en el equipo 1
-        team1Selected = true;        
+        team1Selected = true;
+        team1.classList.add('active')
+        team2.classList.remove('active')
+
+
     }
 
     if(event.target.id == "team2") {
         //Establece que estás jugando como principal en el equipo 2
         team1Selected = false;
+        team1.classList.remove('active')
+        team2.classList.add('active')
+        
     }
 }
 
