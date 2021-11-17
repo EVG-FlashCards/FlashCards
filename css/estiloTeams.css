@@ -71,6 +71,7 @@ body {
     margin: 0 20px;
     border-radius: 20px;
     background: linear-gradient(45deg, #cd0224 25%, rgba(68, 68, 68, 0.4) 25%, rgba(68, 68, 68, 0.4) 50%, #cd0224 50%, #cd0224 75%, rgba(68, 68, 68, 0.4) 75%, rgba(68, 68, 68, 0.4) 100%);
+   /* box-shadow: inset  0 0 5em 0 #cd0224, 0 0 5em 0 #cd0224;*/
     background-size: 40px 40px;
     filter: grayscale(1);
     animation: animateBg 0.5s linear infinite;
@@ -82,10 +83,17 @@ body {
 .container .box:nth-child(2){   
     background: linear-gradient(135deg, #ffbe00 25%, rgba(68, 68, 68, 0.4) 25%, rgba(68, 68, 68, 0.4) 50%, #ffbe00 50%, #ffbe00 75%, rgba(68, 68, 68, 0.4) 75%, rgba(68, 68, 68, 0.4) 100%);
     background-size: 40px 40px;
+   /* box-shadow: inset  0 0 5em 0 #ffbe00, 0 0 5em 0 #ffbe00;*/
 }
 .container .box:hover{
     animation-play-state: running;
-    filter: grayscale(0);
+    filter: drop-shadow(2px 4px 6px black);
+    box-shadow: inset  0 0 5em 0 #cd0224, 0 0 5em 0 #cd0224
+}
+.container .box:hover.box:nth-child(2){
+    animation-play-state: running;
+    filter: drop-shadow(2px 4px 6px black);
+    box-shadow: inset  0 0 5em 0 #ffbe00, 0 0 5em 0 #ffbe00;
 }
 @keyframes animateBg{
     0%{
