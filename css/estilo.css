@@ -12,7 +12,7 @@
 body {
    
     /* RESOLUCIÓN */
-    height: 100%;
+    min-height: 100vh;
     font-family: Rubik;
     background-size: cover;
     background-position: center center;
@@ -96,6 +96,7 @@ nav ul li button img {
 
 
 #pnlImagen {
+    clear: right;
     position: relative;
     margin-top: 5%;
     margin-left: auto;
@@ -139,8 +140,6 @@ nav ul li button img {
     margin: 0 30px;
 }
 #pnlBotones button{
-   
-    position: relative;
     cursor: pointer;
     color: white;
     padding: 0.5em 1em;
@@ -148,7 +147,6 @@ nav ul li button img {
     border-radius: 0.5em;
     font-size: 1em;
     background-color: #059dfc;
-
     
 }
 button:hover {
@@ -199,11 +197,10 @@ button:hover {
 */
 
 footer {
-    margin-top: 10%;
-    background-color: #eceff4;
+    margin-top: 5%;
     position: relative;
+    background-color: #eceff4;
     width: 100%;
-    bottom: 0;
     min-height: 100px;
     display: flex;
     align-items: center;
