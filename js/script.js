@@ -246,6 +246,7 @@ function sumarPuntos(esSuma = null) {
 */
 function ciclosWeb() {
     if(darkMode) {
+
         document.body.style.backgroundColor = "#2e3440";
         document.querySelector("nav").style.backgroundColor = "#2e3440";
         document.querySelector("footer").style.backgroundColor = "#2e3440";
@@ -253,7 +254,6 @@ function ciclosWeb() {
 
         document.getElementById("btnNodes").src = "img/sun.png";
 
-        document.getElementsByTagNameNS("http://www.w3.org/2000/svg", "path")[1].setAttribute("fill","#373d4c");
         darkMode = false;
     }
     else {
@@ -265,7 +265,6 @@ function ciclosWeb() {
 
         document.getElementById("btnNodes").src = "img/moon2.png";
 
-        document.getElementsByTagNameNS("http://www.w3.org/2000/svg", "path")[1].setAttribute("fill","white");
         darkMode = true;
     }
 }

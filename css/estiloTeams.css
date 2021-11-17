@@ -1,5 +1,10 @@
 body {
-    background: URL(https://wallpapertag.com/wallpaper/full/f/8/1/440607-top-football-stadium-background-1920x1200-photos.jpg);
+    /* background: URL(https://wallpapertag.com/wallpaper/full/f/8/1/440607-top-football-stadium-background-1920x1200-photos.jpg);*/
+    background-image: url(../img/anfield.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    
 }
 
 #score {
@@ -36,4 +41,84 @@ body {
     float: right;
     font-weight: bold;
 
+}
+
+
+/*  
+    ========================================================
+                ==   Sección Cajas Equipos       ==
+    ========================================================
+*/
+
+.main_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.container{
+    min-height: 40vh;
+    position: relative;
+    display: flex;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, transparent,rgba(196, 196, 196, 0.37));
+}
+.container .box{
+    position: relative;
+    width: 320px;
+    height: 400px;
+    margin: 0 20px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #cd0224 25%, rgba(68, 68, 68, 0.4) 25%, rgba(68, 68, 68, 0.4) 50%, #cd0224 50%, #cd0224 75%, rgba(68, 68, 68, 0.4) 75%, rgba(68, 68, 68, 0.4) 100%);
+    background-size: 40px 40px;
+    filter: grayscale(1);
+    animation: animateBg 0.5s linear infinite;
+    animation-play-state: paused;
+    transition: filter 1s;
+    display: flex;
+    justify-content: center;
+}
+.container .box:nth-child(2){   
+    background: linear-gradient(135deg, #ffbe00 25%, rgba(68, 68, 68, 0.4) 25%, rgba(68, 68, 68, 0.4) 50%, #ffbe00 50%, #ffbe00 75%, rgba(68, 68, 68, 0.4) 75%, rgba(68, 68, 68, 0.4) 100%);
+    background-size: 40px 40px;
+}
+.container .box:hover{
+    animation-play-state: running;
+    filter: grayscale(0);
+}
+@keyframes animateBg{
+    0%{
+        background-position: 0;
+    }
+    100%{
+        background-position: 40px;
+    }
+}
+.container .box  img{
+    position: absolute;
+    bottom: 0;
+    height: 30%;
+    transition: height 0.5s;
+}
+.container .box:hover  img{
+    height: 300px;
+}
+
+/*  
+    ========================================================
+                **  Paneles de Botones    **
+    ========================================================
+*/
+
+
+#team1, #team2 {
+    /*position: relative;*/
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+  }
+#team1:active, #team2:active, .active {
+  top: 2px;
+  left: 1px;
+  box-shadow: none;
 }

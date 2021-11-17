@@ -10,18 +10,29 @@
     <body>
         <header>
             <nav>
-                <a href="#">Individual</a>
-                <a href="#">Audio</a>
-                <a href="teams.html">Teams</a>
-                <button><img id="btnNodes" src="img/moon2.png"></button>
+                <ul>
+                    <li><img src="img/logoEnglish.png"></li>
+                    <li><a href="#">Individual</a></li>
+                    <li><a href="#">Audio</a></li>
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><button><img id="btnNodes" src="img/moon2.png"></button></li>
+                </ul>
             </nav>
         </header>
         <main>
-            <span id="totalScore">Puntos:</span>
+            <span id="totalScore">Puntos:</span>    
+            <div class="container">
+                <div class="box">
+                    <button id="team1">Equipo 1</button>
+                </div>
+                <div class="box">  
+                    <button id="team2">Equipo 2</button>
+                </div>
+            </div>         
             <div id="paneles">
                 <div id="pnlImagen">
                     <div id="imgEDesc">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fd%2Fd5%2FVertical_Flag_of_the_United_Kingdom.svg%2F300px-Vertical_Flag_of_the_United_Kingdom.svg.png&f=1&nofb=1">
+                        <img src="img/flag.png">
                     </div>
                 </div>
                 <div id="pnlBotones">
@@ -32,17 +43,12 @@
                     <button id="btnIncorrect">Incorrecto</button>
                 </div>
             </div>
-            <div class="toggleEquipos">
-                <button id="team1">Equipo 1</button>
-                <button id="team2">Equipo 2</button>
-            </div>
         </main>
+    
         <footer>
-            <svg viewBox="0 -20 700 110" preserveAspectRatio="none">
-                <path transform="translate(0, -20)" d="M0,10 c80,-22 240,0 350,18 c90,17 260,7.5 350,-20 v50 h-700" fill="#CEB964" />
-                <path d="M0,10 c80,-18 230,-12 350,7 c80,13 260,17 350,-5 v100 h-700z" fill="#f4f6f9" />
-            </svg>
-            FOOTER &copy; 2021 - 2DAW
+            <span>&copy; 2021 - 2DAW - 4ESO</span> 
+            <img src="img/fundacion.png">
+            
         </footer>
         <script src="js/script.js"></script>
     </body>
