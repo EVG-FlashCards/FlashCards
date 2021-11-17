@@ -4,7 +4,7 @@
 */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
 * {
-   /* box-sizing: border-box;*/
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -51,7 +51,7 @@ nav ul li a {
     color: #4c566a;
     text-decoration: none;
     font-size: 1.5em;
-    display: block;
+    
 }
 nav ul li button{
     padding: 5px;
@@ -103,7 +103,7 @@ nav ul li button img {
     background-color: white;
     width: 40%;
     height: auto;
-    box-shadow: 1px 1px 2px 0px;
+    box-shadow: 0px 5px 13px 5px;
     border-radius: 12px;
 }
 
@@ -128,7 +128,7 @@ nav ul li button img {
     width: 40%;
     height: 150px;
     border-radius: 10px;
-    box-shadow: 1px 1px 2px 0px;
+    box-shadow: 0px 5px 13px 5px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -140,7 +140,7 @@ nav ul li button img {
 }
 #pnlBotones button{
    
-    position: relativ;
+    position: relative;
     cursor: pointer;
     color: white;
     padding: 0.5em 1em;
@@ -204,21 +204,22 @@ footer {
     position: relative;
     width: 100%;
     bottom: 0;
+    min-height: 100px;
     display: flex;
     align-items: center;
 }
-footer span{
-    margin: auto;
-    padding-left: 200px;
-}
-footer img{
-    width: 15%;
-    height: auto;
-}
-footer img:first-child{
+footer p{
+
     margin-left: auto;
+    margin-right: 29%;
+
 }
 
+footer div a img{
+    width: 100%;
+    height: 100px;
+    float: right;
+}
 #imgTam {
     width: 10%;
 }
