@@ -40,6 +40,9 @@ window.onload = iniciar
 function iniciar() {
     cargar();
 
+    //Añado puntuaciones a la tabla.
+    //document.getElementById("sTeam1").textContent = "1";
+
     //Tiempo de espera hasta que se carguen los datos del JSON.
     setTimeout(() => {
         //Carga la imagen principal.
@@ -142,8 +145,10 @@ function clicks(event) {
     if(event.target.id == "team1") {
         //Establece que estás jugando como principal en el equipo 1
         team1Selected = true;
-        team1.classList.add('active')
-        team2.classList.remove('active')
+        team1.classList.add('active');
+        team2.classList.remove('active');
+
+        totalScore.textContent = `Puntos: ${puntuacionT1}`;
 
 
     }
@@ -151,8 +156,10 @@ function clicks(event) {
     if(event.target.id == "team2") {
         //Establece que estás jugando como principal en el equipo 2
         team1Selected = false;
-        team1.classList.remove('active')
-        team2.classList.add('active')
+        team1.classList.remove('active');
+        team2.classList.add('active');
+
+        totalScore.textContent = `Puntos: ${puntuacionT2}`;
         
     }
 }
@@ -234,9 +241,12 @@ function sumarPuntos(esSuma = null) {
     }
 
     if(esSuma == null) {
-        console.log("Entra: "+Math.abs(puntuacionT1+puntuacionT2));
+        if(team1Selected)
+            return puntuacionT1;
+        return puntuacionT2;
+        /*console.log("Entra: "+Math.abs(puntuacionT1+puntuacionT2));
         //Devuelve la puntuación total.
-        return puntuacionT1+puntuacionT2;
+        return puntuacionT1+puntuacionT2;*/
     }
 }
 
