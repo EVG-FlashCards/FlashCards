@@ -12,8 +12,12 @@
 body {
    
     /* RESOLUCIÓN */
-    height: 100%;
+    height: 100vh;
     font-family: Rubik;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-image: url('../img/AdobeStock_260966672.jpeg');
 }
 
 /*  
@@ -27,17 +31,42 @@ nav {
     width: 100%;
     height: 100px;
     display: flex;
-    justify-content: center; /* Horizontally space-out items */
-    align-items: center; /* Vertically center align items */
     
     
 }
-nav a {
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Horizontally space-out items */
+    align-items: center; /* Vertically center align items */
+}
+nav ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+nav ul li a {
     padding: 5px;
     margin: 25px;
     color: #4c566a;
     text-decoration: none;
     font-size: 1.5em;
+    
+}
+nav ul li button{
+    padding: 5px;
+    margin: 25px;
+    border: none;
+    border-radius: 10px;
+
+    display: inline-block;
+}
+nav ul li img{
+    width: 20%;
+    margin: auto;
+}
+nav ul li:first-child {
+    margin-right: auto;
 }
 
 nav a:hover{
@@ -46,8 +75,7 @@ nav a:hover{
     border-radius: 10px;
 }
 
-nav button img {
-    border: 0;
+nav ul li button img {
     width: 30px;
     height: 30px;
 }
@@ -66,28 +94,58 @@ nav button img {
     ========================================================
 */
 
-main {
-    clear: right;
-    background-color: aquamarine;
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px;
+    max-width: 80%;
+
+    transition: 300ms ease-in-out;
+    /*opacity: 1;*/
+
 }
 
-#paneles {
-     /* Está puesto aproximadamente al centro (hay que poner la resolución bien y centrarlo correctamente) */
 
+.popupTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid black;
+    padding-bottom: 5px;
+    font-size: 18px;   
 }
+
+.close-Button {
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    
+}
+
 
 #pnlImagen {
-    margin: auto;
+    position: relative;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
-    width: 200px;
-    height: 250px;
-    box-shadow: 1px 1px 2px 0px;
+    width: 40%;
+    min-height: 300px;
+    box-shadow: 0px 5px 13px 5px;
     border-radius: 12px;
 }
 
 #pnlImagen img {
     width: 100%;
-    height: 250px;
+    height: auto;
+    min-height: 300px;
     border-radius: 12px;
 
     /*margin: 20px 50px 20px 50px;*/
@@ -103,37 +161,50 @@ main {
     margin: auto;
     margin-top: 20px;
     background-color: white;
-    width: 200px;
-    height: 100px;
+    width: 40%;
+    height: 150px;
     border-radius: 10px;
-    box-shadow: 1px 1px 2px 0px;
+    box-shadow: 0px 5px 13px 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
 }
-
-#pnlBotones button {
-    margin: 10px;
+#pnlBotones > button {
+    flex: 30%;
+    margin: 0 30px;
+}
+#pnlBotones button{
     cursor: pointer;
-    padding: 5px;
+    color: white;
+    padding: 0.5em 1em;
     border: none;
-    border-radius: 10px;
-    font-size: 0.9em;
-
+    border-radius: 0.5em;
+    font-size: 1em;
+    background-color: #059dfc;
+    
+}
+button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition: 0.3s;
 }
 
 #btnCorrect {
-    background-color: green;
+    background-color: rgb(94, 207, 94) !important; 
     color: white;
 }
 
 #btnIncorrect {
-    background-color: red;
+    background-color: rgb(235, 88, 88) !important;
     color: white;
 }
 #team1, #team2 {
-    position: relative;
     padding: 0.5em 1em;
-    border: 0;
+    font-size: 1em;
+    border: none;
     border-radius: 0.5em;
-    background-color: pink;
+    color: white;
+    background-color: rgb(59, 93, 248);
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
     cursor: pointer;
   }
@@ -160,17 +231,68 @@ main {
 */
 
 footer {
+    margin-top: 100px;
+    height: auto;
+
+    /*position: absolute; <- Probar en diferentes resoluciones, en Desktop funciona bien, en otras se descuadra.
+    bottom: 0;*/
+
     background-color: #eceff4;
-    text-align: center;
-    position: absolute;
     width: 100%;
-    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+footer p{
+    margin-left: auto;
+    margin-right: 29%;
 }
 
-footer svg {
+footer div a img{
     width: 100%;
-    height: 110px;
+    height: 100px;
+    float: right;
 }
 #imgTam {
     width: 10%;
+}
+
+/*  
+    ========================================================
+                ==   Sección POP UP TEAMS       ==
+    ========================================================
+*/
+#score {
+    width: 500px;
+    display: block;
+    padding: 30px;
+    margin: 40px auto;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: gray;
+}
+
+#local {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    float: left;
+    font-weight: bold;
+}
+
+#VS {
+    color: white;
+
+}
+
+#visitante {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    float: right;
+    font-weight: bold;
+
 }
