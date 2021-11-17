@@ -41,9 +41,6 @@ window.onload = iniciar
 function iniciar() {
     cargar();
 
-    //Añado puntuaciones a la tabla.
-    //document.getElementById("sTeam1").textContent = "1";
-
     //Tiempo de espera hasta que se carguen los datos del JSON.
     setTimeout(() => {
         //Carga la imagen principal.
@@ -59,6 +56,7 @@ function cargar() {
     .then(respuesta => respuesta.json())
     .then(preguntas => stringJson = preguntas)
 
+    //CAMBIAR LOS CLICKS.
     document.getElementById("desc").onclick = clicks;
     document.getElementById("phonetics").onclick = clicks;
     document.getElementById("btnCorrect").onclick = clicks;
@@ -66,6 +64,10 @@ function cargar() {
     document.getElementById("btnNodes").onclick = clicks;
     document.getElementById("team1").onclick = clicks;
     document.getElementById("team2").onclick = clicks;
+
+    //Click en el botón de NAV de Teams
+    document.querySelectorAll("nav a")[2].onclick = clicks;
+    document.querySelector(".close-Button").onclick = clicks;
 
 
 }
@@ -81,7 +83,20 @@ function clicks(event) {
     if(event.target.id == "btnNodes") {
         ciclosWeb();
     }
+
+    //Click a botón del NAV de teams
+    if(event.target.innerText == "Teams") {
+
+        popup();
+
+        //Carga de puntos
+        document.getElementById("sTeam1").textContent = puntuacionT1;
+        document.getElementById("sTeam2").textContent = puntuacionT2;
+    }
     
+    if(event.target.classList == "close-Button") {
+        document.getElementsByClassName("popup")[0].style.display = "none";
+    }
 
     //Click en botón de descripción
     if(event.target.id == "desc") {
@@ -261,6 +276,60 @@ function sumarPuntos(esSuma = null) {
         /*console.log("Entra: "+Math.abs(puntuacionT1+puntuacionT2));
         //Devuelve la puntuación total.
         return puntuacionT1+puntuacionT2;*/
+    }
+}
+
+/**
+ * Crea un 'pop up' y comprueba si existe ya uno, de existir unicamente lo muestra 
+ */
+function popup() {
+
+    //Si score existe no lo volvemos a crear, solo mostramos
+    if(document.getElementById("score"))
+        document.getElementsByClassName("popup")[0].style.display = "block";
+    else{
+
+        //Mostramos el pop up
+        document.getElementsByClassName("popup")[0].style.display = "block";
+
+        let divScore = document.createElement("div");
+        divScore.id = "score";
+
+        //Local
+        let equipoLocal = document.createElement("div");
+        equipoLocal.id="local";
+        equipoLocal.textContent ="Equipo local";
+        let scoreTeam1 = document.createElement("span");
+        scoreTeam1.id = "sTeam1";
+        scoreTeam1.textContent = "0";
+
+        equipoLocal.appendChild(scoreTeam1);
+
+        divScore.appendChild(equipoLocal);
+
+        //Versus
+
+        let versus = document.createElement("span");
+        versus.id ="VS";
+        versus.textContent = "VS";
+
+        divScore.appendChild(versus);
+        
+        //Visitantes
+        let equipoVisitante = document.createElement("div");
+        equipoVisitante.id="visitante";
+        equipoVisitante.textContent ="Equipo visitante";
+        let scoreTeam2 = document.createElement("span");
+        scoreTeam2.id = "sTeam2"; //Puntuación aquí
+        scoreTeam2.textContent = "0";
+
+        equipoVisitante.appendChild(scoreTeam2);
+
+
+        divScore.appendChild(equipoVisitante);
+
+
+        document.getElementsByClassName("popupTexto")[0].appendChild(divScore);
     }
 }
 

@@ -94,6 +94,34 @@ nav ul li button img {
     ========================================================
 */
 
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px;
+
+}
+
+.popupTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid black;
+}
+
+.close-Button {
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    
+}
+
 
 #pnlImagen {
     position: relative;
@@ -222,4 +250,45 @@ footer div a img{
 }
 #imgTam {
     width: 10%;
+}
+
+/*  
+    ========================================================
+                ==   Sección POP UP TEAMS       ==
+    ========================================================
+*/
+#score {
+    width: 500px;
+    display: block;
+    padding: 30px;
+    margin: 40px auto;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: gray;
+}
+
+#local {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    float: left;
+    font-weight: bold;
+}
+
+#VS {
+    color: white;
+
+}
+
+#visitante {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    float: right;
+    font-weight: bold;
+
 }
