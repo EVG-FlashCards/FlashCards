@@ -12,6 +12,7 @@ let desc = false;
 let fonetica = false;
 let stringJson = null;
 let pDescripcion = "";
+let pFonetica = "";
 let idPregunta = 0;
 
 let team1Selected = null;
@@ -122,6 +123,16 @@ function clicks(event) {
             //Activamos la variable
             fonetica = true;
 
+            //crear un p que contenga el dato del JSON.
+            pFonetica = document.createElement("p");
+            pFonetica.id = "pFonetica";
+
+            
+            pFonetica.appendChild(document.createTextNode("e"));
+
+            document.getElementById("imgEDesc").appendChild(pFonetica);
+
+
             //pDescripcion.appendChild(document.createTextNode(stringJson.Fonetica[0]));
 
             //Ocultamos la imagen
@@ -131,6 +142,9 @@ function clicks(event) {
             console.log("Click en fonetica");
             //Reset variable
             fonetica = false;
+
+            document.getElementById("imgEDesc").removeChild(pFonetica);
+
 
             //Volvemos a mostrar la imagen anterior.
             document.querySelector("div#imgEDesc > img").style.display = "inline";
@@ -259,6 +273,10 @@ function ciclosWeb() {
 
         document.body.style.backgroundColor = "#2e3440";
         document.querySelector("nav").style.backgroundColor = "#2e3440";
+
+        for(let i=0;i<document.querySelectorAll("nav a").length;i++)
+            document.querySelectorAll("nav a")[i].style.color = "white";
+
         document.querySelector("footer").style.backgroundColor = "#2e3440";
         document.querySelector("footer").style.color = "white";
 
@@ -269,6 +287,10 @@ function ciclosWeb() {
     else {
         document.body.style.backgroundColor = "white";
         document.querySelector("nav").style.backgroundColor = "#eceff4";
+
+        for(let i=0;i<document.querySelectorAll("nav a").length;i++)
+            document.querySelectorAll("nav a")[i].style.color = "#4c566a";
+
         document.querySelector("footer").style.backgroundColor = "#eceff4";
         document.querySelector("footer").style.color = "black";
 
