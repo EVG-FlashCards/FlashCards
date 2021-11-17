@@ -17,35 +17,38 @@ let idPregunta = 0;
 
 let team1Selected = null;
 
+let modoJuegoIndividual = null; //Modo de juego, individual - teams
+
 let totalScore = document.getElementById("totalScore");
 let puntuacionT1 = 0;
 let puntuacionT2 = 0;
 
 
-
-
 //Al hacer click en Teams, se abrirá un pop up con la puntuación de ambos equipos y permitiendo cambiar el nombre de ambos.
-
+//Establecer cookies para los teams
 
 console.log("Cargando...");
 
-//poner aquí la función de inicio onload.
-
 //window.onload = this.iniciar.bind(this);
 
-window.onload = iniciar
+window.onload = iniciar;
 
 /**
  * Función que se inicia al cargar completamente la página.
  */
 function iniciar() {
+
+    //Te cambia automaticamente al modo de juego en el que el jugador esté.
+    if(document.querySelector("button#team1")) modoJuegoIndividual = false;
+    else modoJuegoIndividual = true;
+
     cargar();
 
-    //Tiempo de espera hasta que se carguen los datos del JSON.
+    //Establece un tiempo de espera hasta que se carguen los datos del JSON.
     setTimeout(() => {
         //Carga la imagen principal.
         document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[0].img;
-    }, 200);
+    }, 400);
 }
 
 /**
@@ -56,7 +59,9 @@ function cargar() {
     .then(respuesta => respuesta.json())
     .then(preguntas => stringJson = preguntas)
 
-    //CAMBIAR LOS CLICKS.
+    window.onclick = clicks;
+
+    /*
     document.getElementById("desc").onclick = clicks;
     document.getElementById("phonetics").onclick = clicks;
     document.getElementById("btnCorrect").onclick = clicks;
@@ -67,7 +72,7 @@ function cargar() {
 
     //Click en el botón de NAV de Teams
     document.querySelectorAll("nav a")[2].onclick = clicks;
-    document.querySelector(".close-Button").onclick = clicks;
+    document.querySelector(".close-Button").onclick = clicks;*/
 
 
 }
@@ -77,7 +82,8 @@ function cargar() {
  * @param {*} event 
 */
 function clicks(event) {
-    console.log("Has hecho click en "+event.target.innerText);
+    //console.log("Has hecho click en "+event.target.innerText);
+    console.log(event);
 
     //Click en botón de ciclos
     if(event.target.id == "btnNodes") {
@@ -89,12 +95,25 @@ function clicks(event) {
 
         popup();
 
+        //Se le añade la clase active
+        document.getElementsByClassName("popup")[0].classList.add("activo");
+
         //Carga de puntos
         document.getElementById("sTeam1").textContent = puntuacionT1;
         document.getElementById("sTeam2").textContent = puntuacionT2;
     }
+
+    //REVISAR, clicks fuera del popup
+    /*if(document.getElementsByClassName("activo")[0] && 
+      event.srcElement.className != "popup activo" || event.srcElement.offsetParent.className != "popup activo" )
+    {
+        console.log("Fuera del pop");
+    }*/
     
     if(event.target.classList == "close-Button") {
+        //Se le quita la clase active
+        document.getElementsByClassName("popup")[0].classList.remove = "activo";
+
         document.getElementsByClassName("popup")[0].style.display = "none";
     }
 
@@ -143,7 +162,7 @@ function clicks(event) {
             pFonetica.id = "pFonetica";
 
             
-            pFonetica.appendChild(document.createTextNode("e"));
+            pFonetica.appendChild(document.createTextNode("Fonética"));
 
             document.getElementById("imgEDesc").appendChild(pFonetica);
 
@@ -178,8 +197,6 @@ function clicks(event) {
         team2.classList.remove('active');
 
         totalScore.textContent = `Puntos: ${puntuacionT1}`;
-
-
     }
 
     if(event.target.id == "team2") {
@@ -189,7 +206,6 @@ function clicks(event) {
         team2.classList.add('active');
 
         totalScore.textContent = `Puntos: ${puntuacionT2}`;
-        
     }
 }
 
@@ -200,7 +216,7 @@ function clicks(event) {
 function botonesCheck(event) {
 
     //Si no has seleccionado ningún equipo...
-    if(team1Selected == null) {
+    if(team1Selected == null && !modoJuegoIndividual) {
         alert("[ERROR] Selecciona un equipo primero");
     } else 
     {

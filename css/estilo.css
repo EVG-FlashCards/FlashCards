@@ -12,7 +12,7 @@
 body {
    
     /* RESOLUCIÓN */
-    min-height: 100vh;
+    height: 100vh;
     font-family: Rubik;
     background-size: cover;
     background-position: center center;
@@ -99,20 +99,27 @@ nav ul li button img {
     position: fixed;
     top: 50%;
     left: 50%;
-    z-index: 1;
+    z-index: 10;
     transform: translate(-50%, -50%);
     border: 1px solid black;
     border-radius: 5px;
     background-color: white;
     padding: 5px;
+    max-width: 80%;
+
+    transition: 300ms ease-in-out;
+    /*opacity: 1;*/
 
 }
+
 
 .popupTitle {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 3px solid black;
+    padding-bottom: 5px;
+    font-size: 18px;   
 }
 
 .close-Button {
@@ -225,10 +232,13 @@ button:hover {
 
 footer {
     margin-top: 100px;
-    position: relative;
+    height: auto;
+
+    /*position: absolute; <- Probar en diferentes resoluciones, en Desktop funciona bien, en otras se descuadra.
+    bottom: 0;*/
+
     background-color: #eceff4;
     width: 100%;
-    min-height: 100px;
     display: flex;
     align-items: center;
 }
