@@ -17,7 +17,7 @@ body {
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    background-image: url('../img/AdobeStock_260966672.jpeg')
+    background-image: url('../img/AdobeStock_260966672.jpeg');
 }
 
 /*  
@@ -96,14 +96,13 @@ nav ul li button img {
 
 
 #pnlImagen {
-    clear: right;
     position: relative;
     margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
     background-color: white;
     width: 40%;
-    height: auto;
+    min-height: 300px;
     box-shadow: 0px 5px 13px 5px;
     border-radius: 12px;
 }
@@ -111,6 +110,7 @@ nav ul li button img {
 #pnlImagen img {
     width: 100%;
     height: auto;
+    min-height: 300px;
     border-radius: 12px;
 
     /*margin: 20px 50px 20px 50px;*/
@@ -164,7 +164,6 @@ button:hover {
     color: white;
 }
 #team1, #team2 {
-    position: relative;
     padding: 0.5em 1em;
     font-size: 1em;
     border: none;
@@ -197,7 +196,7 @@ button:hover {
 */
 
 footer {
-    margin-top: 5%;
+    margin-top: 100px;
     position: relative;
     background-color: #eceff4;
     width: 100%;
@@ -206,10 +205,8 @@ footer {
     align-items: center;
 }
 footer p{
-
     margin-left: auto;
     margin-right: 29%;
-
 }
 
 footer div a img{
