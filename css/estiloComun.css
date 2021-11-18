@@ -1,0 +1,106 @@
+/**
+    Proyecto para las FlashCards
+    Licencia: GPL v3
+*/
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+   
+    /* RESOLUCIÓN */
+    min-height: 100vh;
+    font-family: Rubik;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-image: url('../img/AdobeStock_260966672.jpeg');
+}
+
+/*  
+    ========================================================
+                ==   Sección NAV       ==
+    ========================================================
+*/
+
+nav {
+    background-color: #ECEFF4;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    
+    
+}
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Horizontally space-out items */
+    align-items: center; /* Vertically center align items */
+}
+nav ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+nav ul li a {
+    padding: 5px;
+    margin: 25px;
+    color: #4c566a;
+    text-decoration: none;
+    font-size: 1.5em;
+    
+}
+nav ul li button{
+    padding: 5px;
+    margin: 25px;
+    border: none;
+    border-radius: 10px;
+
+    display: inline-block;
+}
+nav ul li img{
+    width: 20%;
+    margin: auto;
+}
+nav ul li:first-child {
+    margin-right: auto;
+}
+
+nav a:hover{
+    transition: 1s;
+    background-color: #abafb4;
+    border-radius: 10px;
+}
+
+nav ul li button img {
+    width: 30px;
+    height: 30px;
+}
+footer {
+    margin-top: 100px;
+    position: relative;
+    background-color: #eceff4;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+}
+footer div {
+    width: 15%;
+}
+footer p{
+    margin-left: auto;
+    margin-right: 29%;
+}
+
+footer div a img{
+    width: 100%;
+    height: 100px;
+    float: right;
+}
+#imgTam {
+    width: 10%;
+}
