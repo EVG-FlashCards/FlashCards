@@ -1,9 +1,6 @@
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+body{
+    background-image: url('../img/AdobeStock_249117407.jpeg') !important;
 }
-
 .contenedor{
     text-align: center;
     position: absolute;
@@ -30,6 +27,11 @@
 .texto2{
     font-size: 30px;
     color: lightblue;
+}
+
+footer{
+    position: absolute !important; 
+    bottom: 0 !important;
 }
 
 
