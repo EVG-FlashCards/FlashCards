@@ -12,7 +12,7 @@
 body {
    
     /* RESOLUCIÓN */
-    height: 100vh;
+    min-height: 100vh;
     font-family: Rubik;
     background-size: cover;
     background-position: center center;
@@ -93,41 +93,6 @@ nav ul li button img {
                 ==   Sección MAIN       ==
     ========================================================
 */
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 10;
-    transform: translate(-50%, -50%);
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: white;
-    padding: 5px;
-    max-width: 80%;
-
-    transition: 300ms ease-in-out;
-    /*opacity: 1;*/
-
-}
-
-
-.popupTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 3px solid black;
-    padding-bottom: 5px;
-    font-size: 18px;   
-}
-
-.close-Button {
-    cursor: pointer;
-    color: black;
-    font-weight: bold;
-    
-}
 
 
 #pnlImagen {
@@ -232,15 +197,15 @@ button:hover {
 
 footer {
     margin-top: 100px;
-    height: auto;
-
-    /*position: absolute; <- Probar en diferentes resoluciones, en Desktop funciona bien, en otras se descuadra.
-    bottom: 0;*/
-
+    position: relative;
     background-color: #eceff4;
     width: 100%;
+    min-height: 100px;
     display: flex;
     align-items: center;
+}
+footer div {
+    width: 15%;
 }
 footer p{
     margin-left: auto;
@@ -254,45 +219,4 @@ footer div a img{
 }
 #imgTam {
     width: 10%;
-}
-
-/*  
-    ========================================================
-                ==   Sección POP UP TEAMS       ==
-    ========================================================
-*/
-#score {
-    width: 500px;
-    display: block;
-    padding: 30px;
-    margin: 40px auto;
-    text-align: center;
-    box-sizing: border-box;
-    background-color: gray;
-}
-
-#local {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
-    float: left;
-    font-weight: bold;
-}
-
-#VS {
-    color: white;
-
-}
-
-#visitante {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
-    float: right;
-    font-weight: bold;
-
 }

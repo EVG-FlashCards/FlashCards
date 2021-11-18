@@ -4,7 +4,7 @@
 */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
 * {
-   /* box-sizing: border-box;*/
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -12,12 +12,12 @@
 body {
    
     /* RESOLUCIÓN */
-    height: 100%;
+    min-height: 100vh;
     font-family: Rubik;
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    background-image: url('../img/AdobeStock_260966672.jpeg')
+    background-image: url('../img/AdobeStock_260966672.jpeg');
 }
 
 /*  
@@ -51,7 +51,7 @@ nav ul li a {
     color: #4c566a;
     text-decoration: none;
     font-size: 1.5em;
-    display: block;
+    
 }
 nav ul li button{
     padding: 5px;
@@ -87,6 +87,83 @@ nav ul li button img {
     float: right;
 }
 
+
+/*  
+    ========================================================
+                ==   Sección MAIN       ==
+    ========================================================
+*/
+
+
+#pnlImagen {
+    position: relative;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    width: 40%;
+    min-height: 300px;
+    box-shadow: 0px 5px 13px 5px;
+    border-radius: 12px;
+}
+
+#pnlImagen img {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    border-radius: 12px;
+
+    /*margin: 20px 50px 20px 50px;*/
+}
+
+/*  
+    ========================================================
+                **  Paneles de Botones    **
+    ========================================================
+*/
+
+#pnlBotones {
+    margin: auto;
+    margin-top: 20px;
+    background-color: white;
+    width: 40%;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 13px 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+#pnlBotones > button {
+    flex: 30%;
+    margin: 0 30px;
+}
+#pnlBotones button{
+    cursor: pointer;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    background-color: #059dfc;
+    
+}
+button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition: 0.3s;
+}
+
+#btnCorrect {
+    background-color: rgb(94, 207, 94) !important; 
+    color: white;
+}
+
+#btnIncorrect {
+    background-color: rgb(235, 88, 88) !important;
+    color: white;
+} 
+
 /*  
     ========================================================
                 ==   Sección FOOTER       ==
@@ -94,26 +171,27 @@ nav ul li button img {
 */
 
 footer {
-    margin-top: 10%;
+    margin-top: 100px;
+    position: relative;
     background-color: #eceff4;
-    position: absolute;
     width: 100%;
-    bottom: 0;
+    min-height: 100px;
     display: flex;
     align-items: center;
 }
-footer span{
-    margin: auto;
-    padding-left: 200px;
-}
-footer img{
+footer div {
     width: 15%;
-    height: auto;
 }
-footer img:first-child{
+footer p{
     margin-left: auto;
+    margin-right: 29%;
 }
 
+footer div a img{
+    width: 100%;
+    height: 100px;
+    float: right;
+}
 #imgTam {
     width: 10%;
 }
