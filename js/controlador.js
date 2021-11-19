@@ -1,3 +1,6 @@
+/**
+ * Clase controladora principal del juego.
+ */
 class Controlador {
 
     constructor() {
@@ -36,20 +39,11 @@ class Controlador {
         fetch ('js/preguntas.json')
         .then(respuesta => respuesta.json())
         .then(preguntas => this.stringJson = preguntas)
+        .catch( r => console.log("Se produjo un error al cargar los datos.")); 
     
         //CAMBIAR LOS CLICKS.
-        document.getElementById("desc").onclick = clicks;
-        document.getElementById("phonetics").onclick = clicks;
-        document.getElementById("btnCorrect").onclick = clicks;
-        document.getElementById("btnIncorrect").onclick = clicks;
-        document.getElementById("btnNodes").onclick = clicks;
-        document.getElementById("team1").onclick = clicks;
-        document.getElementById("team2").onclick = clicks;
-    
-        //Click en el botón de NAV de Teams
-        document.querySelectorAll("nav a")[2].onclick = clicks;
-        document.querySelector(".close-Button").onclick = clicks;
-    
+        window.onclick = this.clicks.bind(this);
+
     
     }
     
@@ -149,27 +143,27 @@ class Controlador {
     
         //Clicks en botones de correcto e incorrecto y equipos.
         if(event.target.id == "btnCorrect" || event.target.id == "btnIncorrect") 
-            botonesCheck(event);
+            this.botonesCheck(event);
     
         //Clicks a equipos 1-2
         if(event.target.id == "team1") {
             //Establece que estás jugando como principal en el equipo 1
-            team1Selected = true;
+            this.team1Selected = true;
             team1.classList.add('active');
             team2.classList.remove('active');
     
-            totalScore.textContent = `Puntos: ${puntuacionT1}`;
+            totalScore.textContent = `Puntos: ${this.puntuacionT1}`;
     
     
         }
     
         if(event.target.id == "team2") {
             //Establece que estás jugando como principal en el equipo 2
-            team1Selected = false;
+            this.team1Selected = false;
             team1.classList.remove('active');
             team2.classList.add('active');
     
-            totalScore.textContent = `Puntos: ${puntuacionT2}`;
+            totalScore.textContent = `Puntos: ${this.puntuacionT2}`;
             
         }
     }
@@ -181,7 +175,7 @@ class Controlador {
     botonesCheck(event) {
     
         //Si no has seleccionado ningún equipo...
-        if(team1Selected == null) {
+        if(this.team1Selected == null) {
             alert("[ERROR] Selecciona un equipo primero");
         } else 
         {
@@ -189,15 +183,15 @@ class Controlador {
             if(event.target.id == "btnCorrect" ) {
                 console.log("Click en Correcto");
     
-                if(stringJson.Preguntas[idPregunta] == undefined) return;
+                if(this.stringJson.Preguntas[idPregunta] == undefined) return;
     
                 //Pasamos a la siguiente pregunta
-                idPregunta++;
+                this.idPregunta++;
     
-                sumarPuntos(true);
+                this.sumarPuntos(true);
     
                 //Actualizamos los puntos totales
-                totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+                this.totalScore.textContent = `Puntos: ${this.sumarPuntos()}`;
     
                 //console.log("Puntos:"+puntuacionT1 + " " + puntuacionT2);
     
