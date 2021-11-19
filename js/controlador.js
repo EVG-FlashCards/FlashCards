@@ -39,7 +39,7 @@ class Controlador {
         fetch ('js/preguntas.json')
         .then(respuesta => respuesta.json())
         .then(preguntas => this.stringJson = preguntas)
-        .catch( r => console.log("Se produjo un error al cargar los datos.")); 
+        .catch( r => window.location.reload()); 
     
         //CAMBIAR LOS CLICKS.
         window.onclick = this.clicks.bind(this);
