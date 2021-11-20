@@ -1,6 +1,5 @@
 body{
     background-image: url('../img/AdobeStock_249117407.jpeg') !important;
-    min-height: 1400px !important;
 }
 .contenedor{
     text-align: center;
@@ -21,10 +20,22 @@ body{
     display: flex;
     flex-direction: column;
     color: white;
+    margin-bottom: 500px;
 }
-.auto{
+/*.auto{
     
     display: flex;
+    margin: 20px;
+    width: 400px;
+    height: 20px;
+    overflow: hidden;
+    transition: all .5s ease;
+    color: white;
+}*/
+.auto{
+    background-color: rgba(211, 211, 211, 0.24);
+    border-radius: 10px;
+    padding: 20px;
     margin: 20px;
     width: 400px;
     height: 20px;
@@ -46,13 +57,6 @@ body{
 .texto2{
     font-size: 30px;
     color: lightblue;
-}
-
-footer{
-    position: fixed !important;
-    left: 0;
-    bottom: 0;
-    width: 100%;
 }
 
 
