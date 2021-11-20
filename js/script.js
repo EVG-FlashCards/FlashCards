@@ -49,8 +49,31 @@ function iniciar() {
         //Carga la imagen principal.
         document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[0].img;
     }, 400);
+   
+    lyrics();
 }
 
+ /**
+     * Animación de expansión para las letras de las canciones 
+     */
+function lyrics(){
+    if (document.getElementsByClassName("auto")) {
+        let autos = document.getElementsByClassName("auto");
+        for (let i=0; i<autos.length; i++) {
+          autos[i].addEventListener("mouseover", autoOver);
+          autos[i].addEventListener("mouseout", autoOut);
+        }
+      }
+      
+      function autoOver() {
+        this.style.height = this.scrollHeight + "px";
+      }
+      
+      function autoOut() {
+        this.style.height = "20px";
+      }
+}
+ 
 /**
  * Inicia los clicks a los botones y carga el JSON y lo añade a @var stringJson
  */
@@ -350,6 +373,7 @@ function popup() {
 }
 
 
+
 /**
  * Función para controlar el tema de la página en modo día ó noche.
 */
@@ -384,4 +408,6 @@ function ciclosWeb() {
 
         darkMode = true;
     }
+    
+    
 }
