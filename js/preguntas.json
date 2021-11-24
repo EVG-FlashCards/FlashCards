@@ -3,7 +3,9 @@
     "Preguntas":[
         {
             "img": "img/Animales/horse.png",
-            "desc": "Horse"
+            "desc": "Horse",
+            "audio": "",
+            "fonetica":""
         },
         {
             "img": "img/Animales/cat.png",
