@@ -1,119 +1,69 @@
-/**
-    Proyecto para las FlashCards
-    Licencia: GPL v3
-*/
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
-* {
-   /* box-sizing: border-box;*/
-    margin: 0;
-    padding: 0;
+body{
+    background-image: url('../img/AdobeStock_249117407.jpeg') !important;
 }
-
-body {
-   
-    /* RESOLUCIÓN */
-    height: 100%;
-    font-family: Rubik;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    background-image: url('../img/AdobeStock_260966672.jpeg')
-}
-
-/*  
-    ========================================================
-                ==   Sección NAV       ==
-    ========================================================
-*/
-
-nav {
-    background-color: #ECEFF4;
+.contenedor{
+    text-align: center;
+    position: relative;
+    margin-top: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     width: 100%;
-    height: 100px;
-    display: flex;
-    
-    
 }
-nav ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center; /* Horizontally space-out items */
-    align-items: center; /* Vertically center align items */
-}
-nav ul li {
-    display: inline-block;
-    list-style-type: none;
-}
-nav ul li a {
-    padding: 5px;
-    margin: 25px;
-    color: #4c566a;
-    text-decoration: none;
-    font-size: 1.5em;
+.contenedor span{
+    color: white;
+    text-transform: uppercase;
     display: block;
 }
-nav ul li button{
-    padding: 5px;
-    margin: 25px;
-    border: none;
-    border-radius: 10px;
-
-    display: inline-block;
-}
-nav ul li img{
-    width: 20%;
-    margin: auto;
-}
-nav ul li:first-child {
-    margin-right: auto;
-}
-
-nav a:hover{
-    transition: 1s;
-    background-color: #abafb4;
-    border-radius: 10px;
-}
-
-nav ul li button img {
-    width: 30px;
-    height: 30px;
-}
-
-/*
-    Modos día/noche
-*/
-#modes {
+.derecha{
     float: right;
-}
-
-/*  
-    ========================================================
-                ==   Sección FOOTER       ==
-    ========================================================
-*/
-
-footer {
-    margin-top: 10%;
-    background-color: #eceff4;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    color: white;
+    margin-bottom: 500px;
 }
-footer span{
-    margin: auto;
-    padding-left: 200px;
-}
-footer img{
-    width: 15%;
-    height: auto;
-}
-footer img:first-child{
-    margin-left: auto;
+/*.auto{
+    
+    display: flex;
+    margin: 20px;
+    width: 400px;
+    height: 20px;
+    overflow: hidden;
+    transition: all .5s ease;
+    color: white;
+}*/
+.auto{
+    background-color: rgba(211, 211, 211, 0.24);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 400px;
+    height: 20px;
+    overflow: hidden;
+    transition: all .5s ease;
+    color: white;
 }
 
-#imgTam {
-    width: 10%;
+
+.texto1{
+    position: relative;
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    background-color: black;
+    animation: textos 3s 1;
+}
+.texto2{
+    font-size: 30px;
+    color: lightblue;
+}
+
+
+/*SCSS*/
+@keyframes textos {
+    0%{
+        color: black;
+        margin-bottom: -40px;
+    }
 }

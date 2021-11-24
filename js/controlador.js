@@ -1,9 +1,16 @@
+import { Vista } from "./vista.js";
+import { Modelo } from "./modelo.js";
+
 /**
  * Clase controladora principal del juego.
- */
+*/
 class Controlador {
 
     constructor() {
+
+        this.vista = new Vista();
+        this.modelo = new Modelo();
+
         this.darkMode = true;
         this.desc = false;
         this.fonetica = false;
@@ -18,10 +25,15 @@ class Controlador {
         this.puntuacionT1 = 0;
         this.puntuacionT2 = 0;
 
+        this.modoJuegoIndividual = null;
+
         window.onload = this.iniciar.bind(this);
 
     }
 
+    /**
+     * Método de inicio.
+     */
     iniciar() {
         this.cargar();
     
@@ -56,7 +68,7 @@ class Controlador {
     
         //Click en botón de ciclos
         if(event.target.id == "btnNodes") {
-            ciclosWeb();
+            this.vista.ciclosWeb();
         }
     
         //Click a botón del NAV de teams
@@ -89,7 +101,7 @@ class Controlador {
                 pDescripcion.id = "pDescripcion";
     
                 
-                pDescripcion.appendChild(document.createTextNode(stringJson.Preguntas[idPregunta].desc));
+                pDescripcion.appendChild(document.createTextNode(stringJson.Preguntas[this.idPregunta].desc));
     
                 //obtener el div y metemos el parrafo dentro.
                 document.getElementById("imgEDesc").appendChild(pDescripcion);
@@ -147,23 +159,36 @@ class Controlador {
     
         //Clicks a equipos 1-2
         if(event.target.id == "team1") {
-            //Establece que estás jugando como principal en el equipo 1
-            this.team1Selected = true;
-            team1.classList.add('active');
-            team2.classList.remove('active');
-    
-            totalScore.textContent = `Puntos: ${this.puntuacionT1}`;
-    
-    
+           //Establece que estás jugando como principal en el equipo 1
+            team1Selected = true;
+
+            //Ocultamos los equipos.
+            document.getElementsByClassName("main_container")[0].style.display = "none";
+
+            //Mostramos la flashcard
+            document.querySelector("#panelesTeam").style.display = "block";
+
+            //Mostramos la elección de equipo
+            document.querySelector(".chooseTeam1").style.display = "block";
+            document.querySelector(".chooseTeam2").style.display = "block";
+
         }
     
         if(event.target.id == "team2") {
-            //Establece que estás jugando como principal en el equipo 2
-            this.team1Selected = false;
-            team1.classList.remove('active');
-            team2.classList.add('active');
-    
-            totalScore.textContent = `Puntos: ${this.puntuacionT2}`;
+             //Establece que estás jugando como principal en el equipo 2
+            team1Selected = false;
+
+            //Ocultamos los equipos.
+            document.getElementsByClassName("main_container")[0].style.display = "none";
+
+            //Mostramos la flashcard
+            document.querySelector("#panelesTeam").style.display = "block";
+
+            //Mostramos la elección de equipo
+            document.querySelector(".chooseTeam1").style.display = "block";
+            document.querySelector(".chooseTeam2").style.display = "block";
+
+            //totalScore.textContent = `Puntos: ${puntuacionT2}`;
             
         }
     }
@@ -183,18 +208,18 @@ class Controlador {
             if(event.target.id == "btnCorrect" ) {
                 console.log("Click en Correcto");
     
-                if(this.stringJson.Preguntas[idPregunta] == undefined) return;
-    
+                if(stringJson.Preguntas[idPregunta] == undefined) return;
+
                 //Pasamos a la siguiente pregunta
-                this.idPregunta++;
-    
-                this.sumarPuntos(true);
-    
+                idPregunta++;
+
+                sumarPuntos(true);
+
                 //Actualizamos los puntos totales
-                this.totalScore.textContent = `Puntos: ${this.sumarPuntos()}`;
-    
+                //totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+
                 //console.log("Puntos:"+puntuacionT1 + " " + puntuacionT2);
-    
+
                 //Mostramos la siguiente imagen                
                 document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
             }
@@ -202,7 +227,7 @@ class Controlador {
             //Click en botón de incorrecto
             if(event.target.id == "btnIncorrect") {
                 console.log("Click en Incorrecto");
-                
+            
                 if(stringJson.Preguntas[idPregunta] == undefined) return;
     
                 //Pasamos a la siguiente pregunta
@@ -212,7 +237,7 @@ class Controlador {
                 sumarPuntos(false);
     
                 //Actualizamos los puntos totales
-                totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+                //totalScore.textContent = `Puntos: ${sumarPuntos()}`;
     
                 //Ocultamos la imagen
                 document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;

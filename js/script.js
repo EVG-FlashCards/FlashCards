@@ -39,7 +39,15 @@ window.onload = iniciar;
 function iniciar() {
 
     //Te cambia automaticamente al modo de juego en el que el jugador esté.
-    if(document.querySelector("button#team1")) modoJuegoIndividual = false;
+    if(document.getElementById("score")) {
+        //Establecemos que jugamos en teams
+        modoJuegoIndividual = false;
+
+        //Ocultamos temporalmente...
+        document.querySelector("#panelesTeam").style.display = "none";
+        document.querySelector(".chooseTeam1").style.display = "none";
+        document.querySelector(".chooseTeam2").style.display = "none";
+    } 
     else modoJuegoIndividual = true;
 
     cargar();
@@ -49,8 +57,31 @@ function iniciar() {
         //Carga la imagen principal.
         document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[0].img;
     }, 400);
+   
+    lyrics();
 }
 
+/**
+    * Animación de expansión para las letras de las canciones 
+*/
+function lyrics(){
+    if (document.getElementsByClassName("auto")) {
+        let autos = document.getElementsByClassName("auto");
+        for (let i=0; i<autos.length; i++) {
+          autos[i].addEventListener("mouseover", autoOver);
+          autos[i].addEventListener("mouseout", autoOut);
+        }
+      }
+      
+      function autoOver() {
+        this.style.height = this.scrollHeight + "px";
+      }
+      
+      function autoOut() {
+        this.style.height = "20px";
+      }
+}
+ 
 /**
  * Inicia los clicks a los botones y carga el JSON y lo añade a @var stringJson
  */
@@ -58,22 +89,9 @@ function cargar() {
     fetch ('js/preguntas.json')
     .then(respuesta => respuesta.json())
     .then(preguntas => stringJson = preguntas)
+    .catch( r => window.location.reload()); //Fix temporal de la rama MVC
 
     window.onclick = clicks;
-
-    /*
-    document.getElementById("desc").onclick = clicks;
-    document.getElementById("phonetics").onclick = clicks;
-    document.getElementById("btnCorrect").onclick = clicks;
-    document.getElementById("btnIncorrect").onclick = clicks;
-    document.getElementById("btnNodes").onclick = clicks;
-    document.getElementById("team1").onclick = clicks;
-    document.getElementById("team2").onclick = clicks;
-
-    //Click en el botón de NAV de Teams
-    document.querySelectorAll("nav a")[2].onclick = clicks;
-    document.querySelector(".close-Button").onclick = clicks;*/
-
 
 }
 
@@ -90,10 +108,24 @@ function clicks(event) {
         ciclosWeb();
     }
 
+    if(event.target.classList == "chooseTeam1" || event.target.classList == "chooseTeam2") {
+
+        //Ocultamos la flashcard y los botones de atrás.
+        document.querySelector("#panelesTeam").style.display = "none";
+        document.querySelector(".chooseTeam1").style.display = "none";
+        document.querySelector(".chooseTeam2").style.display = "none";
+
+        //Mostramos la elección de equipo
+        document.getElementsByClassName("main_container")[0].style.display = "flex";
+
+
+
+    }
+
     //Click a botón del NAV de teams
     if(event.target.innerText == "Teams") {
 
-        popup();
+        //popup(); ¿¿ reutilizable ??
 
         //Se le añade la clase active
         document.getElementsByClassName("popup")[0].classList.add("activo");
@@ -102,6 +134,7 @@ function clicks(event) {
         document.getElementById("sTeam1").textContent = puntuacionT1;
         document.getElementById("sTeam2").textContent = puntuacionT2;
     }
+    
 
     //REVISAR, clicks fuera del popup
     /*if(document.getElementsByClassName("activo")[0] && 
@@ -193,19 +226,36 @@ function clicks(event) {
     if(event.target.id == "team1") {
         //Establece que estás jugando como principal en el equipo 1
         team1Selected = true;
-        team1.classList.add('active');
-        team2.classList.remove('active');
 
-        totalScore.textContent = `Puntos: ${puntuacionT1}`;
+        //Ocultamos los equipos.
+        document.getElementsByClassName("main_container")[0].style.display = "none";
+
+        //Mostramos la flashcard
+        document.querySelector("#panelesTeam").style.display = "block";
+
+        //Mostramos la elección de equipo
+        document.querySelector(".chooseTeam1").style.display = "block";
+        document.querySelector(".chooseTeam2").style.display = "block";
+
+
+        //totalScore.textContent = `Puntos: ${puntuacionT1}`;
     }
 
     if(event.target.id == "team2") {
         //Establece que estás jugando como principal en el equipo 2
         team1Selected = false;
-        team1.classList.remove('active');
-        team2.classList.add('active');
 
-        totalScore.textContent = `Puntos: ${puntuacionT2}`;
+        //Ocultamos los equipos.
+        document.getElementsByClassName("main_container")[0].style.display = "none";
+
+        //Mostramos la flashcard
+        document.querySelector("#panelesTeam").style.display = "block";
+
+        //Mostramos la elección de equipo
+        document.querySelector(".chooseTeam1").style.display = "block";
+        document.querySelector(".chooseTeam2").style.display = "block";
+
+        //totalScore.textContent = `Puntos: ${puntuacionT2}`;
     }
 }
 
@@ -232,7 +282,7 @@ function botonesCheck(event) {
             sumarPuntos(true);
 
             //Actualizamos los puntos totales
-            totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+            //totalScore.textContent = `Puntos: ${sumarPuntos()}`;
 
             //console.log("Puntos:"+puntuacionT1 + " " + puntuacionT2);
 
@@ -253,7 +303,7 @@ function botonesCheck(event) {
             sumarPuntos(false);
 
             //Actualizamos los puntos totales
-            totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+            //totalScore.textContent = `Puntos: ${sumarPuntos()}`;
 
             //Ocultamos la imagen
             document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
@@ -271,17 +321,27 @@ function sumarPuntos(esSuma = null) {
     if(esSuma) {
         if(team1Selected) {
             puntuacionT1++;
+            modoJuegoIndividual ? totalScore.textContent = puntuacionT1 : sTeam1.textContent = puntuacionT1;
             console.log(puntuacionT1);
         } 
         else { 
             puntuacionT2++;
+
+            modoJuegoIndividual ? totalScore.textContent = puntuacionT2 : sTeam2.textContent = puntuacionT2;
+
         }
     } else if(esSuma === false) { //Revisar lo de !esSuma
         if(team1Selected) { 
             puntuacionT1 = puntuacionT1-1;
+
+            modoJuegoIndividual ? totalScore.textContent = puntuacionT1 : sTeam1.textContent = puntuacionT1;
+
         }
         else { 
             puntuacionT2 = puntuacionT2-1;
+
+            modoJuegoIndividual ? totalScore.textContent = puntuacionT2 : sTeam1.textContent = puntuacionT2;
+
         }
     }
 
@@ -350,6 +410,7 @@ function popup() {
 }
 
 
+
 /**
  * Función para controlar el tema de la página en modo día ó noche.
 */
@@ -384,4 +445,6 @@ function ciclosWeb() {
 
         darkMode = true;
     }
+    
+    
 }

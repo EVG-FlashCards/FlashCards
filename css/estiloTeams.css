@@ -1,6 +1,28 @@
 body {
-    background: URL(https://wallpapertag.com/wallpaper/full/f/8/1/440607-top-football-stadium-background-1920x1200-photos.jpg);
+    /* background: URL(https://wallpapertag.com/wallpaper/full/f/8/1/440607-top-football-stadium-background-1920x1200-photos.jpg);*/
+    background-image: url(../img/anfield.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    
 }
+
+
+/*  
+    ========================================================
+                **  SCORE Y CAMBIAR DE EQUIPO   **
+    ========================================================
+*/
+
+.contenedor{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chooseTeam1, .chooseTeam2, img { 
+    height: 50px;
+}
+
 
 #score {
     width: 500px;
@@ -10,6 +32,7 @@ body {
     text-align: center;
     box-sizing: border-box;
     background-color: gray;
+    border-radius: 20px;
 }
 
 #local {
@@ -36,4 +59,186 @@ body {
     float: right;
     font-weight: bold;
 
+}
+
+
+/*  
+    ========================================================
+                ==   Sección Cajas Equipos       ==
+    ========================================================
+*/
+
+.main_container{
+    clear: both;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.container{
+    min-height: 40vh;
+    position: relative;
+    display: flex;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, transparent,rgba(196, 196, 196, 0.37));
+}
+.container .box{
+    position: relative;
+    width: 320px;
+    height: 400px;
+    margin: 0 20px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #cd0224 25%, rgba(68, 68, 68, 0.4) 25%, rgba(68, 68, 68, 0.4) 50%, #cd0224 50%, #cd0224 75%, rgba(68, 68, 68, 0.4) 75%, rgba(68, 68, 68, 0.4) 100%);
+   /* box-shadow: inset  0 0 5em 0 #cd0224, 0 0 5em 0 #cd0224;*/
+    background-size: 40px 40px;
+    filter: grayscale(1);
+    animation: animateBg 0.5s linear infinite;
+    animation-play-state: paused;
+    transition: filter 1s;
+    display: flex;
+    justify-content: center;
+}
+.container .box:nth-child(2){   
+    background: linear-gradient(135deg, #ffbe00 25%, rgba(68, 68, 68, 0.4) 25%, rgba(68, 68, 68, 0.4) 50%, #ffbe00 50%, #ffbe00 75%, rgba(68, 68, 68, 0.4) 75%, rgba(68, 68, 68, 0.4) 100%);
+    background-size: 40px 40px;
+   /* box-shadow: inset  0 0 5em 0 #ffbe00, 0 0 5em 0 #ffbe00;*/
+}
+.container .box:hover{
+    animation-play-state: running;
+    filter: drop-shadow(2px 4px 6px black);
+    box-shadow: inset  0 0 5em 0 #cd0224, 0 0 5em 0 #cd0224
+}
+.container .box:hover.box:nth-child(2){
+    animation-play-state: running;
+    filter: drop-shadow(2px 4px 6px black);
+    box-shadow: inset  0 0 5em 0 #ffbe00, 0 0 5em 0 #ffbe00;
+}
+@keyframes animateBg{
+    0%{
+        background-position: 0;
+    }
+    100%{
+        background-position: 40px;
+    }
+}
+.container .box  img{
+    position: absolute;
+    bottom: 0;
+    height: 30%;
+    transition: height 0.5s;
+}
+.container .box:hover  img{
+    height: 300px;
+    cursor: pointer;
+}
+
+/*  
+    ========================================================
+                **  Paneles de Botones    **
+    ========================================================
+*/
+
+
+#team1, #team2 {
+    /*position: relative;*/
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+  }
+#team1:active, #team2:active, .active {
+  top: 2px;
+  left: 1px;
+  box-shadow: none;
+}
+
+/*  
+    ========================================================
+                **  Paneles de FLASH CARD    **
+    ========================================================
+*/
+#pnlImagen {
+    clear: both;
+    position: relative;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    width: 40%;
+    min-height: 300px;
+    box-shadow: 0px 5px 13px 5px;
+    border-radius: 12px;
+}
+
+#pnlImagen img {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    border-radius: 12px;
+
+    /*margin: 20px 50px 20px 50px;*/
+}
+
+
+/*  
+    ========================================================
+                **  Paneles de Botones (FLASH CARD)   **
+    ========================================================
+*/
+
+#pnlBotones {
+    margin: auto;
+    margin-top: 20px;
+    background-color: white;
+    width: 40%;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 13px 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+#pnlBotones > button {
+    flex: 30%;
+    margin: 0 30px;
+}
+#pnlBotones button{
+    cursor: pointer;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    background-color: #059dfc;
+    
+}
+button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition: 0.3s;
+}
+
+#btnCorrect {
+    background-color: rgb(94, 207, 94) !important; 
+    color: white;
+}
+
+#btnIncorrect {
+    background-color: rgb(235, 88, 88) !important;
+    color: white;
+}
+#team1, #team2 {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    border: none;
+    border-radius: 0.5em;
+    color: white;
+    background-color: rgb(59, 93, 248);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+#team1:active, #team2:active, .active {
+  top: 2px;
+  left: 1px;
+  box-shadow: none;
 }
