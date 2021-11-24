@@ -104,3 +104,40 @@ footer div a img{
 #imgTam {
     width: 10%;
 }
+
+/* POP UP (está por si se quiere reutilizar en el futuro, poco más...) */
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px;
+    max-width: 80%;
+
+    transition: 300ms ease-in-out;
+    /*opacity: 1;*/
+
+}
+
+
+.popupTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid black;
+    padding-bottom: 5px;
+    font-size: 18px;   
+}
+
+.close-Button {
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    
+}
