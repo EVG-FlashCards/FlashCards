@@ -23,7 +23,7 @@ export class Modelo {
 
                 this.modoJuegoIndividual ? this.totalScore.textContent = this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
 
-                console.log(puntuacionT1);
+                console.log(this.puntuacionT1);
             } 
             else { 
                 this.puntuacionT2++;

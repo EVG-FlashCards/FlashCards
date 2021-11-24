@@ -4,7 +4,7 @@ import { Modelo } from "./modelo.js";
 /**
  * Clase controladora principal del juego.
 */
-class Controlador {
+export class Controlador {
 
     constructor() {
 
@@ -33,8 +33,25 @@ class Controlador {
 
     /**
      * Método de inicio.
-     */
+    */
     iniciar() {
+
+        //Te cambia automaticamente al modo de juego en el que el jugador esté.
+        if(document.getElementById("score")) {
+            //Establecemos que jugamos en teams
+            this.modoJuegoIndividual = false;
+
+            //Ocultamos temporalmente...
+            document.querySelector("#panelesTeam").style.display = "none";
+            document.querySelector(".chooseTeam1").style.display = "none";
+            document.querySelector(".chooseTeam2").style.display = "none";
+        } 
+        else this.modoJuegoIndividual = true;
+
+        //Establezco en el modelo el modo de juego en el que estamos.
+        this.modelo.modoJuegoIndividual = this.modoJuegoIndividual;
+
+        //Cargamos los datos.
         this.cargar();
     
         //Tiempo de espera hasta que se carguen los datos del JSON.
@@ -43,12 +60,35 @@ class Controlador {
             document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[0].img;
         }, 200);
     }
+
+    /**
+        * Animación de expansión para las letras de las canciones 
+    */
+    lyrics() {
+        if (document.getElementsByClassName("auto")) {
+            let autos = document.getElementsByClassName("auto");
+
+            for (let i=0; i<autos.length; i++) {
+                autos[i].addEventListener("mouseover", autoOver);
+                autos[i].addEventListener("mouseout", autoOut);
+            }
+        }
+    }
+
+    /* Método que comprueba que el ratón esté dentro*/
+    autoOver() {
+        this.style.height = this.scrollHeight + "px";
+    }
+    /** Método que comprueba que el ratón se haya salido */
+    autoOut() {
+        this.style.height = "20px";
+    }
     
     /**
      * Inicia los clicks a los botones y carga el JSON y lo añade a @var stringJson
      */
     cargar() {
-        fetch ('js/preguntas.json')
+        fetch ('./js/preguntas.json')
         .then(respuesta => respuesta.json())
         .then(preguntas => this.stringJson = preguntas)
         .catch( r => window.location.reload()); 
@@ -64,17 +104,28 @@ class Controlador {
      * @param {*} event 
     */
     clicks(event) {
-        console.log("Has hecho click en "+event.target.innerText);
+        //console.log("Has hecho click en "+event.target.innerText);
     
         //Click en botón de ciclos
         if(event.target.id == "btnNodes") {
             this.vista.ciclosWeb();
         }
+
+        if(event.target.classList == "chooseTeam1" || event.target.classList == "chooseTeam2") {
+
+            //Ocultamos la flashcard y los botones de atrás.
+            document.querySelector("#panelesTeam").style.display = "none";
+            document.querySelector(".chooseTeam1").style.display = "none";
+            document.querySelector(".chooseTeam2").style.display = "none";
+    
+            //Mostramos la elección de equipo
+            document.getElementsByClassName("main_container")[0].style.display = "flex";
+        }
     
         //Click a botón del NAV de teams
-        if(event.target.innerText == "Teams") {
+        /*if(event.target.innerText == "Teams") {
     
-            popup();
+            //popup(); ¿¿ REUTILIZABLE ??
     
             //Carga de puntos
             document.getElementById("sTeam1").textContent = puntuacionT1;
@@ -83,35 +134,35 @@ class Controlador {
         
         if(event.target.classList == "close-Button") {
             document.getElementsByClassName("popup")[0].style.display = "none";
-        }
+        }*/
     
         //Click en botón de descripción
         if(event.target.id == "desc") {
     
-            if(!desc) {
+            if(!this.desc) {
                 console.log("Click en descripción.");
                 //Activamos la variable
-                desc = true;
+                this.desc = true;
                 
                 //Ocultamos la imagen
                 document.querySelector("div#imgEDesc > img").style.display = "none";
     
                 //crear un p que contenga el dato del JSON.
-                pDescripcion = document.createElement("p");
-                pDescripcion.id = "pDescripcion";
+                this.pDescripcion = document.createElement("p");
+                this.pDescripcion.id = "pDescripcion";
     
                 
-                pDescripcion.appendChild(document.createTextNode(stringJson.Preguntas[this.idPregunta].desc));
+                this.pDescripcion.appendChild(document.createTextNode(this.stringJson.Preguntas[this.idPregunta].desc));
     
                 //obtener el div y metemos el parrafo dentro.
-                document.getElementById("imgEDesc").appendChild(pDescripcion);
+                document.getElementById("imgEDesc").appendChild(this.pDescripcion);
             } else {
                 console.log("Click en descripcion.");
                 //Reset variable
-                desc = false;
+                this.desc = false;
     
                 //Eliminamos el texto de la descripción
-                document.getElementById("imgEDesc").removeChild(pDescripcion);
+                document.getElementById("imgEDesc").removeChild(this.pDescripcion);
     
                 //Volvemos a mostrar la imagen anterior.
                 document.querySelector("div#imgEDesc > img").style.display = "inline";
@@ -120,19 +171,19 @@ class Controlador {
         
         //Click en botón de fonetica
         if(event.target.id == "phonetics") {
-            if(!fonetica) {
+            if(!this.fonetica) {
                 console.log("Click en fonética");
                 //Activamos la variable
-                fonetica = true;
+                this.fonetica = true;
     
                 //crear un p que contenga el dato del JSON.
-                pFonetica = document.createElement("p");
-                pFonetica.id = "pFonetica";
+                this.pFonetica = document.createElement("p");
+                this.pFonetica.id = "pFonetica";
     
                 
-                pFonetica.appendChild(document.createTextNode("e"));
+                this.pFonetica.appendChild(document.createTextNode("e"));
     
-                document.getElementById("imgEDesc").appendChild(pFonetica);
+                document.getElementById("imgEDesc").appendChild(this.pFonetica);
     
     
                 //pDescripcion.appendChild(document.createTextNode(stringJson.Fonetica[0]));
@@ -143,9 +194,9 @@ class Controlador {
             else {
                 console.log("Click en fonetica");
                 //Reset variable
-                fonetica = false;
+                this.fonetica = false;
     
-                document.getElementById("imgEDesc").removeChild(pFonetica);
+                document.getElementById("imgEDesc").removeChild(this.pFonetica);
     
     
                 //Volvemos a mostrar la imagen anterior.
@@ -160,7 +211,8 @@ class Controlador {
         //Clicks a equipos 1-2
         if(event.target.id == "team1") {
            //Establece que estás jugando como principal en el equipo 1
-            team1Selected = true;
+            this.team1Selected = true;
+            this.modelo.team1Selected = true;
 
             //Ocultamos los equipos.
             document.getElementsByClassName("main_container")[0].style.display = "none";
@@ -175,9 +227,10 @@ class Controlador {
         }
     
         if(event.target.id == "team2") {
-             //Establece que estás jugando como principal en el equipo 2
-            team1Selected = false;
-
+            //Establece que estás jugando como principal en el equipo 2
+            this.team1Selected = false;
+            this.modelo.team1Selected = false;
+            
             //Ocultamos los equipos.
             document.getElementsByClassName("main_container")[0].style.display = "none";
 
@@ -200,7 +253,7 @@ class Controlador {
     botonesCheck(event) {
     
         //Si no has seleccionado ningún equipo...
-        if(this.team1Selected == null) {
+        if(this.team1Selected == null && !this.modoJuegoIndividual) {
             alert("[ERROR] Selecciona un equipo primero");
         } else 
         {
@@ -208,12 +261,12 @@ class Controlador {
             if(event.target.id == "btnCorrect" ) {
                 console.log("Click en Correcto");
     
-                if(stringJson.Preguntas[idPregunta] == undefined) return;
+                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
 
                 //Pasamos a la siguiente pregunta
-                idPregunta++;
+                this.idPregunta++;
 
-                sumarPuntos(true);
+                this.modelo.sumarPuntos(true);
 
                 //Actualizamos los puntos totales
                 //totalScore.textContent = `Puntos: ${sumarPuntos()}`;
@@ -221,26 +274,26 @@ class Controlador {
                 //console.log("Puntos:"+puntuacionT1 + " " + puntuacionT2);
 
                 //Mostramos la siguiente imagen                
-                document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
+                document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[this.idPregunta].img;
             }
     
             //Click en botón de incorrecto
             if(event.target.id == "btnIncorrect") {
                 console.log("Click en Incorrecto");
             
-                if(stringJson.Preguntas[idPregunta] == undefined) return;
+                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
     
                 //Pasamos a la siguiente pregunta
-                idPregunta++;
+                this.idPregunta++;
     
                 
-                sumarPuntos(false);
+                this.modelo.sumarPuntos(false);
     
                 //Actualizamos los puntos totales
                 //totalScore.textContent = `Puntos: ${sumarPuntos()}`;
     
                 //Ocultamos la imagen
-                document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
+                document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[this.idPregunta].img;
             }
         }
     }
