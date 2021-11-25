@@ -58,12 +58,6 @@ export class Controlador {
 
         //Cargamos los datos.
         this.cargar();
-    
-        //Tiempo de espera hasta que se carguen los datos del JSON.
-        setTimeout(() => {
-            //Carga la imagen principal.
-            document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[0].img;
-        }, 200);
     }
 
     /**
@@ -93,15 +87,28 @@ export class Controlador {
      * Inicia los clicks a los botones y carga el JSON y lo añade a @var stringJson
      */
     cargar() {
-        fetch ('./js/preguntas.json')
-        .then(respuesta => respuesta.json())
-        .then(preguntas => this.stringJson = preguntas)
-        .catch( r => window.location.reload()); 
-    
+        let promesa = new Promise(function(correcto,incorrecto) { 
+
+
+            fetch ('./js/preguntas.json')
+            .then(respuesta => respuesta.json())
+            .then(preguntas => correcto(preguntas))
+            .catch(r => incorrecto("Error en: "+r));
+        });
+
+        promesa.then(r => this.stringJson = r)
+        .catch(r => console.log("Se produjo una excepción: "+r));
+
+        //console.log(this.stringJson);
+
+        //Carga la primera imagen
+        document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[0].img;
+
+
+        console.log(promesa);
+
         //CAMBIAR LOS CLICKS.
         window.onclick = this.clicks.bind(this);
-
-    
     }
     
     /**

@@ -28,26 +28,26 @@ export class Modelo {
             if(this.team1Selected) {
                 this.puntuacionT1++;
 
-                this.modoJuegoIndividual ? this.totalScore.textContent = this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
+                this.modoJuegoIndividual ? this.totalScore.textContent = "Puntos: "+this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
 
                 console.log(this.puntuacionT1);
             } 
             else { 
                 this.puntuacionT2++;
 
-                this.modoJuegoIndividual ? this.totalScore.textContent = this.puntuacionT2 : sTeam2.textContent = this.puntuacionT2;
+                this.modoJuegoIndividual ? this.totalScore.textContent = "Puntos: "+this.puntuacionT2 : sTeam2.textContent = this.puntuacionT2;
 
             }
         } else if(esSuma === false) { //Revisar lo de !esSuma
             if(this.team1Selected) { 
                 this.puntuacionT1 = this.puntuacionT1-1;
-                this.modoJuegoIndividual ? this.totalScore.textContent = this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
+                this.modoJuegoIndividual ? this.totalScore.textContent = "Puntos: "+this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
 
             }
             else { 
                 this.puntuacionT2 = this.puntuacionT2-1;
 
-                this.modoJuegoIndividual ? totalScore.textContent = this.puntuacionT2 : sTeam2.textContent = this.puntuacionT2;
+                this.modoJuegoIndividual ? totalScore.textContent = "Puntos: "+this.puntuacionT2 : sTeam2.textContent = this.puntuacionT2;
 
             }
         }
