@@ -14,3 +14,8 @@ Fondo con bandera / estadio de fútbol <br>
 Equipos / Estilo futbol <br>
 Puntuación (estilo penaltis)<br>
 ‘Never walk alone’ ~<br>
+
+<h2>Plan de proyecto</h2>
+<br>https://docs.google.com/spreadsheets/d/1M7zfS2XNsCC59GjYL_yYxg4tk0Y1FZCqkxYJ4KuXtM8/edit?usp=sharing
+<h2>Casos de uso</h2>
+<br>https://docs.google.com/spreadsheets/d/1bxkl3tUEOza-uJASmeMmLtfLwGLwm-408yi2g7FxHzQ/edit?usp=sharing
