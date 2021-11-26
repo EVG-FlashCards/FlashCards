@@ -86,7 +86,7 @@ export class Controlador {
     /**
      * Inicia los clicks a los botones y carga el JSON y lo añade a @var stringJson
      */
-    cargar() {
+    async cargar() {
         let promesa = new Promise(function(correcto,incorrecto) { 
 
 
@@ -96,18 +96,19 @@ export class Controlador {
             .catch(r => incorrecto("Error en: "+r));
         });
 
-        promesa.then(r => this.stringJson = r)
-        .catch(r => console.log("Se produjo una excepción: "+r));
-
-        //console.log(this.stringJson);
-
         //Carga la primera imagen
-        document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[0].img;
+        try {
+            //Espera a que los datos esten listos.
+            await promesa.then(r => this.stringJson = r)
+            .catch(r => console.log("Se produjo una excepción: "+r));
 
+            document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[0].img;
 
-        console.log(promesa);
+        } catch(err) {
+            console.error(err);
+        }
 
-        //CAMBIAR LOS CLICKS.
+        //Inicio de los clicks.
         window.onclick = this.clicks.bind(this);
     }
     
