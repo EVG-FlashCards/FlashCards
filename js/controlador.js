@@ -25,6 +25,7 @@ export class Controlador {
         this.idPregunta = 0;
 
         this.team1Selected = null;
+        this.otherGameMode = ''; //Otro modo de juego, como el modo de 'Audio', por ejemplo.
 
         this.totalScore = document.getElementById("totalScore");
         this.puntuacionT1 = 0;
@@ -53,11 +54,15 @@ export class Controlador {
         } 
         else this.modoJuegoIndividual = true;
 
+        //Apaño rápido...
+       if(document.querySelector("[data-audio=itsAudio]")) this.otherGameMode='a'
+
         //Establezco en el modelo el modo de juego en el que estamos.
         this.modelo.modoJuegoIndividual = this.modoJuegoIndividual;
 
         //Cargamos los datos.
-        this.cargar();
+        if(this.otherGameMode == '')
+            this.cargar();
     }
 
     /**
