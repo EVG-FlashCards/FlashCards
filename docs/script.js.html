@@ -40,38 +40,76 @@ let desc = false;
 let fonetica = false;
 let stringJson = null;
 let pDescripcion = "";
+let pFonetica = "";
 let idPregunta = 0;
 
 let team1Selected = null;
+
+let modoJuegoIndividual = null; //Modo de juego, individual - teams
 
 let totalScore = document.getElementById("totalScore");
 let puntuacionT1 = 0;
 let puntuacionT2 = 0;
 
-//Al hacer click en Teams, se abrirá un pop up con la puntuación de ambos equipos y permitiendo cambiar el nombre de ambos.
 
+//Al hacer click en Teams, se abrirá un pop up con la puntuación de ambos equipos y permitiendo cambiar el nombre de ambos.
+//Establecer cookies para los teams
 
 console.log("Cargando...");
 
-//poner aquí la función de inicio onload.
-
 //window.onload = this.iniciar.bind(this);
 
-window.onload = iniciar
+window.onload = iniciar;
 
 /**
  * Función que se inicia al cargar completamente la página.
  */
 function iniciar() {
+
+    //Te cambia automaticamente al modo de juego en el que el jugador esté.
+    if(document.getElementById("score")) {
+        //Establecemos que jugamos en teams
+        modoJuegoIndividual = false;
+
+        //Ocultamos temporalmente...
+        document.querySelector("#panelesTeam").style.display = "none";
+        document.querySelector(".chooseTeam1").style.display = "none";
+        document.querySelector(".chooseTeam2").style.display = "none";
+    } 
+    else modoJuegoIndividual = true;
+
     cargar();
 
-    //Tiempo de espera hasta que se carguen los datos del JSON.
+    //Establece un tiempo de espera hasta que se carguen los datos del JSON.
     setTimeout(() => {
         //Carga la imagen principal.
         document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[0].img;
-    }, 200);
+    }, 400);
+   
+    lyrics();
 }
 
+/**
+    * Animación de expansión para las letras de las canciones 
+*/
+function lyrics(){
+    if (document.getElementsByClassName("auto")) {
+        let autos = document.getElementsByClassName("auto");
+        for (let i=0; i&lt;autos.length; i++) {
+          autos[i].addEventListener("mouseover", autoOver);
+          autos[i].addEventListener("mouseout", autoOut);
+        }
+      }
+      
+      function autoOver() {
+        this.style.height = this.scrollHeight + "px";
+      }
+      
+      function autoOut() {
+        this.style.height = "20px";
+      }
+}
+ 
 /**
  * Inicia los clicks a los botones y carga el JSON y lo añade a @var stringJson
  */
@@ -79,14 +117,9 @@ function cargar() {
     fetch ('js/preguntas.json')
     .then(respuesta => respuesta.json())
     .then(preguntas => stringJson = preguntas)
+    .catch( r => window.location.reload()); //Fix temporal de la rama MVC
 
-    document.getElementById("desc").onclick = clicks;
-    document.getElementById("phonetics").onclick = clicks;
-    document.getElementById("btnCorrect").onclick = clicks;
-    document.getElementById("btnIncorrect").onclick = clicks;
-    document.getElementById("btnNodes").onclick = clicks;
-    document.getElementById("team1").onclick = clicks;
-    document.getElementById("team2").onclick = clicks;
+    window.onclick = clicks;
 
 }
 
@@ -95,11 +128,54 @@ function cargar() {
  * @param {*} event 
 */
 function clicks(event) {
-    console.log("Has hecho click en "+event.target.innerText);
+    //console.log("Has hecho click en "+event.target.innerText);
+    console.log(event);
 
     //Click en botón de ciclos
     if(event.target.id == "btnNodes") {
         ciclosWeb();
+    }
+
+    if(event.target.classList == "chooseTeam1" || event.target.classList == "chooseTeam2") {
+
+        //Ocultamos la flashcard y los botones de atrás.
+        document.querySelector("#panelesTeam").style.display = "none";
+        document.querySelector(".chooseTeam1").style.display = "none";
+        document.querySelector(".chooseTeam2").style.display = "none";
+
+        //Mostramos la elección de equipo
+        document.getElementsByClassName("main_container")[0].style.display = "flex";
+
+
+
+    }
+
+    //Click a botón del NAV de teams
+    if(event.target.innerText == "Teams") {
+
+        //popup(); ¿¿ reutilizable ??
+
+        //Se le añade la clase active
+        document.getElementsByClassName("popup")[0].classList.add("activo");
+
+        //Carga de puntos
+        document.getElementById("sTeam1").textContent = puntuacionT1;
+        document.getElementById("sTeam2").textContent = puntuacionT2;
+    }
+    
+
+    //REVISAR, clicks fuera del popup
+    /*if(document.getElementsByClassName("activo")[0] &amp;&amp; 
+      event.srcElement.className != "popup activo" || event.srcElement.offsetParent.className != "popup activo" )
+    {
+        console.log("Fuera del pop");
+    }*/
+    
+    if(event.target.classList == "close-Button") {
+        //Se le quita la clase active
+        document.getElementsByClassName("popup")[0].classList.remove = "activo";
+
+        document.getElementsByClassName("popup")[0].style.display = "none";
     }
 
     //Click en botón de descripción
@@ -142,6 +218,16 @@ function clicks(event) {
             //Activamos la variable
             fonetica = true;
 
+            //crear un p que contenga el dato del JSON.
+            pFonetica = document.createElement("p");
+            pFonetica.id = "pFonetica";
+
+            
+            pFonetica.appendChild(document.createTextNode("Fonética"));
+
+            document.getElementById("imgEDesc").appendChild(pFonetica);
+
+
             //pDescripcion.appendChild(document.createTextNode(stringJson.Fonetica[0]));
 
             //Ocultamos la imagen
@@ -151,6 +237,9 @@ function clicks(event) {
             console.log("Click en fonetica");
             //Reset variable
             fonetica = false;
+
+            document.getElementById("imgEDesc").removeChild(pFonetica);
+
 
             //Volvemos a mostrar la imagen anterior.
             document.querySelector("div#imgEDesc > img").style.display = "inline";
@@ -164,12 +253,37 @@ function clicks(event) {
     //Clicks a equipos 1-2
     if(event.target.id == "team1") {
         //Establece que estás jugando como principal en el equipo 1
-        team1Selected = true;        
+        team1Selected = true;
+
+        //Ocultamos los equipos.
+        document.getElementsByClassName("main_container")[0].style.display = "none";
+
+        //Mostramos la flashcard
+        document.querySelector("#panelesTeam").style.display = "block";
+
+        //Mostramos la elección de equipo
+        document.querySelector(".chooseTeam1").style.display = "block";
+        document.querySelector(".chooseTeam2").style.display = "block";
+
+
+        //totalScore.textContent = `Puntos: ${puntuacionT1}`;
     }
 
     if(event.target.id == "team2") {
         //Establece que estás jugando como principal en el equipo 2
         team1Selected = false;
+
+        //Ocultamos los equipos.
+        document.getElementsByClassName("main_container")[0].style.display = "none";
+
+        //Mostramos la flashcard
+        document.querySelector("#panelesTeam").style.display = "block";
+
+        //Mostramos la elección de equipo
+        document.querySelector(".chooseTeam1").style.display = "block";
+        document.querySelector(".chooseTeam2").style.display = "block";
+
+        //totalScore.textContent = `Puntos: ${puntuacionT2}`;
     }
 }
 
@@ -180,7 +294,7 @@ function clicks(event) {
 function botonesCheck(event) {
 
     //Si no has seleccionado ningún equipo...
-    if(team1Selected == null) {
+    if(team1Selected == null &amp;&amp; !modoJuegoIndividual) {
         alert("[ERROR] Selecciona un equipo primero");
     } else 
     {
@@ -188,13 +302,15 @@ function botonesCheck(event) {
         if(event.target.id == "btnCorrect" ) {
             console.log("Click en Correcto");
 
+            if(stringJson.Preguntas[idPregunta] == undefined) return;
+
             //Pasamos a la siguiente pregunta
             idPregunta++;
 
             sumarPuntos(true);
 
             //Actualizamos los puntos totales
-            totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+            //totalScore.textContent = `Puntos: ${sumarPuntos()}`;
 
             //console.log("Puntos:"+puntuacionT1 + " " + puntuacionT2);
 
@@ -205,6 +321,8 @@ function botonesCheck(event) {
         //Click en botón de incorrecto
         if(event.target.id == "btnIncorrect") {
             console.log("Click en Incorrecto");
+            
+            if(stringJson.Preguntas[idPregunta] == undefined) return;
 
             //Pasamos a la siguiente pregunta
             idPregunta++;
@@ -213,7 +331,7 @@ function botonesCheck(event) {
             sumarPuntos(false);
 
             //Actualizamos los puntos totales
-            totalScore.textContent = `Puntos: ${sumarPuntos()}`;
+            //totalScore.textContent = `Puntos: ${sumarPuntos()}`;
 
             //Ocultamos la imagen
             document.querySelector("div#imgEDesc > img").src = stringJson.Preguntas[idPregunta].img;
@@ -231,26 +349,94 @@ function sumarPuntos(esSuma = null) {
     if(esSuma) {
         if(team1Selected) {
             puntuacionT1++;
+            modoJuegoIndividual ? totalScore.textContent = puntuacionT1 : sTeam1.textContent = puntuacionT1;
             console.log(puntuacionT1);
         } 
         else { 
             puntuacionT2++;
+
+            modoJuegoIndividual ? totalScore.textContent = puntuacionT2 : sTeam2.textContent = puntuacionT2;
+
         }
     } else if(esSuma === false) { //Revisar lo de !esSuma
         if(team1Selected) { 
             puntuacionT1 = puntuacionT1-1;
+
+            modoJuegoIndividual ? totalScore.textContent = puntuacionT1 : sTeam1.textContent = puntuacionT1;
+
         }
         else { 
             puntuacionT2 = puntuacionT2-1;
+
+            modoJuegoIndividual ? totalScore.textContent = puntuacionT2 : sTeam1.textContent = puntuacionT2;
+
         }
     }
 
     if(esSuma == null) {
-        console.log("Entra: "+Math.abs(puntuacionT1+puntuacionT2));
+        if(team1Selected)
+            return puntuacionT1;
+        return puntuacionT2;
+        /*console.log("Entra: "+Math.abs(puntuacionT1+puntuacionT2));
         //Devuelve la puntuación total.
-        return puntuacionT1+puntuacionT2;
+        return puntuacionT1+puntuacionT2;*/
     }
 }
+
+/**
+ * Crea un 'pop up' y comprueba si existe ya uno, de existir unicamente lo muestra 
+ */
+function popup() {
+
+    //Si score existe no lo volvemos a crear, solo mostramos
+    if(document.getElementById("score"))
+        document.getElementsByClassName("popup")[0].style.display = "block";
+    else{
+
+        //Mostramos el pop up
+        document.getElementsByClassName("popup")[0].style.display = "block";
+
+        let divScore = document.createElement("div");
+        divScore.id = "score";
+
+        //Local
+        let equipoLocal = document.createElement("div");
+        equipoLocal.id="local";
+        equipoLocal.textContent ="Equipo local";
+        let scoreTeam1 = document.createElement("span");
+        scoreTeam1.id = "sTeam1";
+        scoreTeam1.textContent = "0";
+
+        equipoLocal.appendChild(scoreTeam1);
+
+        divScore.appendChild(equipoLocal);
+
+        //Versus
+
+        let versus = document.createElement("span");
+        versus.id ="VS";
+        versus.textContent = "VS";
+
+        divScore.appendChild(versus);
+        
+        //Visitantes
+        let equipoVisitante = document.createElement("div");
+        equipoVisitante.id="visitante";
+        equipoVisitante.textContent ="Equipo visitante";
+        let scoreTeam2 = document.createElement("span");
+        scoreTeam2.id = "sTeam2"; //Puntuación aquí
+        scoreTeam2.textContent = "0";
+
+        equipoVisitante.appendChild(scoreTeam2);
+
+
+        divScore.appendChild(equipoVisitante);
+
+
+        document.getElementsByClassName("popupTexto")[0].appendChild(divScore);
+    }
+}
+
 
 
 /**
@@ -258,28 +444,37 @@ function sumarPuntos(esSuma = null) {
 */
 function ciclosWeb() {
     if(darkMode) {
+
         document.body.style.backgroundColor = "#2e3440";
         document.querySelector("nav").style.backgroundColor = "#2e3440";
+
+        for(let i=0;i&lt;document.querySelectorAll("nav a").length;i++)
+            document.querySelectorAll("nav a")[i].style.color = "white";
+
         document.querySelector("footer").style.backgroundColor = "#2e3440";
         document.querySelector("footer").style.color = "white";
 
         document.getElementById("btnNodes").src = "img/sun.png";
 
-        document.getElementsByTagNameNS("http://www.w3.org/2000/svg", "path")[1].setAttribute("fill","#373d4c");
         darkMode = false;
     }
     else {
         document.body.style.backgroundColor = "white";
         document.querySelector("nav").style.backgroundColor = "#eceff4";
+
+        for(let i=0;i&lt;document.querySelectorAll("nav a").length;i++)
+            document.querySelectorAll("nav a")[i].style.color = "#4c566a";
+
         document.querySelector("footer").style.backgroundColor = "#eceff4";
         document.querySelector("footer").style.color = "black";
 
 
         document.getElementById("btnNodes").src = "img/moon2.png";
 
-        document.getElementsByTagNameNS("http://www.w3.org/2000/svg", "path")[1].setAttribute("fill","white");
         darkMode = true;
     }
+    
+    
 }</code></pre>
         </article>
     </section>
@@ -290,13 +485,13 @@ function ciclosWeb() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#botonesCheck">botonesCheck</a></li><li><a href="global.html#cargar">cargar</a></li><li><a href="global.html#ciclosWeb">ciclosWeb</a></li><li><a href="global.html#clicks">clicks</a></li><li><a href="global.html#iniciar">iniciar</a></li><li><a href="global.html#sumarPuntos">sumarPuntos</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#botonesCheck">botonesCheck</a></li><li><a href="global.html#cargar">cargar</a></li><li><a href="global.html#ciclosWeb">ciclosWeb</a></li><li><a href="global.html#clicks">clicks</a></li><li><a href="global.html#iniciar">iniciar</a></li><li><a href="global.html#lyrics">lyrics</a></li><li><a href="global.html#popup">popup</a></li><li><a href="global.html#sumarPuntos">sumarPuntos</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Nov 12 2021 21:11:04 GMT+0100 (hora estándar de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Nov 24 2021 16:10:50 GMT+0100 (hora estándar de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

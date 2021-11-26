@@ -1,5 +1,5 @@
 /**
- * @file Controlador principal de FlashCards
+ * @file Controlador principal de FlashCards [OBSOLETO, se eliminará en próximas versiones]
  * @author Angel Manuel Fernandez, Juan Diego Carretero, Sergio Matamoros   Delgado, Jose Angel Fernandez
  * @license GPL v3 2021
  * @description Proyecto Flash Cards.
