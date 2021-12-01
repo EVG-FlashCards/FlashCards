@@ -20,10 +20,10 @@
             "phonetic":"/ˈbɔːrd ɪ ˈreɪzər/"
         },
         {
-            "img": "img/Material_escolar/bookbag.jpg",
-            "desc": "Bookbag: A bag or satchel used by students for carrying books.",
-            "audio": "",
-            "phonetic":""
+            "img": "img/Material_escolar/bottle.jpg",
+            "desc": "Bottle: a container for holding liquids, having a neck and mouth and made of glass or plastic.",
+            "audio": "audio/audios_fonetica/bottle.mp3",
+            "phonetic":"/ˈbɒtəl/"
         },
         {
             "img": "img/Material_escolar/book.jpg",
@@ -62,10 +62,10 @@
             "phonetic":"/ɪˈreɪzər/"
         },
         {
-            "img": "img/Material_escolar/hand_sanitizer.jpg",
-            "desc": "Hand Sanitizier: A substance or preparation for killing germs.",
-            "audio": "",
-            "phonetic":""
+            "img": "img/Material_escolar/compass.jpg",
+            "desc": "Compass: a V-shaped instrument for drawing circles, measuring distances, etc.",
+            "audio": "audio/audios_fonetica/compass.mp3",
+            "phonetic":"/ˈkʌmpəs/"
         },
         {
             "img": "img/Material_escolar/highlighter_pen.jpeg",
