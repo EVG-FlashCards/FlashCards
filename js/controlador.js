@@ -22,7 +22,7 @@ export class Controlador {
         this.stringJson = null;
         this.pDescripcion = "";
         this.pFonetica = "";
-        this.idPregunta = 0;
+        this.idPregunta = 20;
 
         this.team1Selected = null;
         this.otherGameMode = ''; //Otro modo de juego, como el modo de 'Audio', por ejemplo.
@@ -65,38 +65,8 @@ export class Controlador {
         //Apaño rápido...
        if(document.querySelector("[data-audio=itsAudio]")) {
            this.otherGameMode='a';
-           this.lyrics();
-
-           //cargar las letras rnd
-
-           this.arraySongs = [
-               ["Christina Aguilera","Beautiful"],
-               ["Imagine Dragons","Radioactive"],
-               ["Nathan Evans", "Wellerman (Sea Shanty)"]
-           ];
-
-           let rndSong = this.arraySongs[Math.floor(Math.random()*this.arraySongs.length)];
-
-           this.getLyrics(rndSong[0],rndSong[1]);
-
-           //Cargar las canciones rnd.
-
-           let buttonRnd = document.createElement("button");
-           buttonRnd.textContent = "Generar canción";
-           buttonRnd.onclick = rndSong;
-
-           let pAudio = document.createElement("p");
-           pAudio.textContent = rndSong[0];
-
-           let audio = document.createElement("audio");
-           audio.controls = "controls autoplay";
-           audio.type = 'audio/mpeg';
-           audio.src = `audio/${rndSong[1]}.mp3`;
-
-           document.getElementsByClassName("derecha")[0].appendChild(audio);
-           document.getElementsByClassName("derecha")[0].appendChild(pAudio);
-
-           document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
+           
+            this.crearSong();
 
        }
 
@@ -114,6 +84,41 @@ export class Controlador {
             //this.vista.darkMode = this.obtCookie("ciclos");
             this.vista.ciclosWeb();
         }
+    }
+
+    crearSong() {
+        this.lyrics();
+
+        //cargar las letras rnd
+
+        this.arraySongs = [
+            ["Christina Aguilera","Beautiful"],
+            ["Imagine Dragons","Radioactive"],
+            ["Nathan Evans", "Wellerman (Sea Shanty)"]
+        ];
+
+        let rndSong = this.arraySongs[Math.floor(Math.random()*this.arraySongs.length)];
+
+        this.getLyrics(rndSong[0],rndSong[1]);
+
+        //Cargar las canciones rnd.
+
+        let buttonRnd = document.createElement("button");
+        buttonRnd.textContent = "Generar canción";
+        buttonRnd.onclick = function() { crearSong(); };
+
+        let pAudio = document.createElement("p");
+        pAudio.textContent = rndSong[0];
+
+        let audio = document.createElement("audio");
+        audio.controls = "controls autoplay";
+        audio.type = 'audio/mpeg';
+        audio.src = `audio/${rndSong[1]}.mp3`;
+
+        document.getElementsByClassName("derecha")[0].appendChild(audio);
+        document.getElementsByClassName("derecha")[0].appendChild(pAudio);
+
+        document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
     }
 
     //API musica, 
@@ -374,7 +379,7 @@ export class Controlador {
             if(event.target.id == "btnCorrect" ) {
                 console.log("Click en Correcto");
     
-                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
+                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return; //REVISAR *******
 
                 //Pasamos a la siguiente pregunta
                 this.idPregunta++;
