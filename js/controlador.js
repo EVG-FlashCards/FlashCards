@@ -31,6 +31,14 @@ export class Controlador {
         this.puntuacionT1 = 0;
         this.puntuacionT2 = 0;
 
+        //Cookie
+        this.fechaCaducidad = new Date();
+
+        //Establecemos que caduque en 30 días a partir de hoy.
+        this.fechaCaducidad.setDate(this.fechaCaducidad.getDate()+30);
+
+        //Fin cookie
+
         this.modoJuegoIndividual = null;
 
         window.onload = this.iniciar.bind(this);
@@ -55,7 +63,42 @@ export class Controlador {
         else this.modoJuegoIndividual = true;
 
         //Apaño rápido...
-       if(document.querySelector("[data-audio=itsAudio]")) this.otherGameMode='a'
+       if(document.querySelector("[data-audio=itsAudio]")) {
+           this.otherGameMode='a';
+           this.lyrics();
+
+           //cargar las letras rnd
+
+           this.arraySongs = [
+               ["Christina Aguilera","Beautiful"],
+               ["Imagine Dragons","Radioactive"],
+               ["Nathan Evans", "Wellerman (Sea Shanty)"]
+           ];
+
+           let rndSong = this.arraySongs[Math.floor(Math.random()*this.arraySongs.length)];
+
+           this.getLyrics(rndSong[0],rndSong[1]);
+
+           //Cargar las canciones rnd.
+
+           let buttonRnd = document.createElement("button");
+           buttonRnd.textContent = "Generar canción";
+           buttonRnd.onclick = rndSong;
+
+           let pAudio = document.createElement("p");
+           pAudio.textContent = rndSong[0];
+
+           let audio = document.createElement("audio");
+           audio.controls = "controls autoplay";
+           audio.type = 'audio/mpeg';
+           audio.src = `audio/${rndSong[1]}.mp3`;
+
+           document.getElementsByClassName("derecha")[0].appendChild(audio);
+           document.getElementsByClassName("derecha")[0].appendChild(pAudio);
+
+           document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
+
+       }
 
         //Establezco en el modelo el modo de juego en el que estamos.
         this.modelo.modoJuegoIndividual = this.modoJuegoIndividual;
@@ -63,6 +106,56 @@ export class Controlador {
         //Cargamos los datos.
         if(this.otherGameMode == '')
             this.cargar();
+
+        //Inicio de los clicks.
+        window.onclick = this.clicks.bind(this);
+
+        if(this.obtCookie("ciclos") == "false") {
+            //this.vista.darkMode = this.obtCookie("ciclos");
+            this.vista.ciclosWeb();
+        }
+    }
+
+    //API musica, 
+    async getLyrics(artist, songTitle) {
+        let apiURL = "https://api.lyrics.ovh";
+        const response = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
+        const data = await response.json();
+    
+        const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
+    
+        //Actualizo el div
+        document.getElementsByClassName("auto")[0].innerHTML = `<h2><strong>${artist}</strong> - ${songTitle}</h2>
+        <p>${lyrics}</p>`;
+
+    }
+
+    /**
+   * Devuelve el valor de una cookie si la encuentra.
+   * @param {String} username 
+   * @returns - Cadena
+   */
+    obtCookie(username) {
+        let nomb = username+"=";
+        //Pasa la cookie a string
+        let cookieDecoded = decodeURIComponent(document.cookie);
+        let array = cookieDecoded.split(";");
+  
+        //Recorremos el array
+        for(let i=0;i<array.length;i++) {
+           let c = array[i];
+           //Recorre hasta que encuentre un espacio
+           while(c.charAt(0) == " ") {
+                 c.substring(1);//Vamos quitando los espacios si los hay.
+           }
+           //Comprobamos si lo ha encontrado.
+           if(c.indexOf(nomb)==0){
+                 return c.substring(nomb.length,c.length);
+           }
+        }
+        //No encontró nada, así que devolvemos vacio.
+        console.log("No se pudo obtener la cookie con nombre: "+nomb);
+        return "";
     }
 
     /**
@@ -73,8 +166,8 @@ export class Controlador {
             let autos = document.getElementsByClassName("auto");
 
             for (let i=0; i<autos.length; i++) {
-                autos[i].addEventListener("mouseover", autoOver);
-                autos[i].addEventListener("mouseout", autoOut);
+                autos[i].addEventListener("mouseover", this.autoOver);
+                autos[i].addEventListener("mouseout", this.autoOut);
             }
         }
     }
@@ -112,9 +205,6 @@ export class Controlador {
         } catch(err) {
             console.error(err);
         }
-
-        //Inicio de los clicks.
-        window.onclick = this.clicks.bind(this);
     }
     
     /**
@@ -127,6 +217,8 @@ export class Controlador {
         //Click en botón de ciclos
         if(event.target.id == "btnNodes") {
             this.vista.ciclosWeb();
+            //actualizo la cookie para guardar en el último modo en el que entró
+            document.cookie = `ciclos=${this.vista.darkMode};expires=${this.fechaCaducidad}`;
         }
 
         if(event.target.classList == "chooseTeam1" || event.target.classList == "chooseTeam2") {
@@ -156,6 +248,7 @@ export class Controlador {
     
         //Click en botón de descripción
         if(event.target.id == "desc") {
+            if(this.fonetica) return;
     
             if(!this.desc) {
                 console.log("Click en descripción.");
@@ -189,6 +282,8 @@ export class Controlador {
         
         //Click en botón de fonetica
         if(event.target.id == "phonetics") {
+            if(this.desc) return;
+
             if(!this.fonetica) {
                 console.log("Click en fonética");
                 //Activamos la variable
