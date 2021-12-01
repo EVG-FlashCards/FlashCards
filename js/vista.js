@@ -7,13 +7,17 @@
  * Clase Vista del juego.
 */
 export class Vista {
+
    constructor() {
+
+      this.modelo = null;
+
       this.darkMode = true;
    } 
    /**
     * Método que crea un 'pop up' y comprueba si existe ya uno, de existir unicamente lo muestra 
     * == Método OBSOLETO == (¿¿ REUTILIZABLE ??)
-    */
+   */
    popup() {
 
       //Si score existe no lo volvemos a crear, solo mostramos
@@ -99,5 +103,54 @@ export class Vista {
 
          this.darkMode = true;
       }
+   }
+
+   /**
+    * Método que crea el contenedor de la letra de la canción junto a sus botones necesarios.
+   */
+   crearSong(tituloSong, nombreAudio) {
+
+
+      //Cargar las canciones rnd.
+      let buttonRnd = document.createElement("button");
+      buttonRnd.textContent = "Canción aleatoria";
+      buttonRnd.onclick = () => {
+
+         let arrayCancion = this.modelo.cancionesAleatorias();//this.crearSong.bind(this);
+
+         //Redefino con nuevos valores.
+         tituloSong = arrayCancion[0];
+         nombreAudio = arrayCancion[1];
+
+         //Genero una nueva letra
+         this.modelo.getLyrics(tituloSong, nombreAudio);
+
+         this.crearSong(tituloSong,nombreAudio);
+      }
+
+      //Inicio variables de bloque
+      let pAudio = null;
+      let audio = null;
+
+      //Si no existe el elemento P, entonces lo creamos.
+      if(!document.querySelector(".derecha p")){
+         pAudio = document.createElement("p");
+         pAudio.id ="pTitle";
+         
+
+         audio = document.createElement("audio");
+         audio.controls = "controls autoplay";
+         audio.type = 'audio/mpeg';
+
+         document.getElementsByClassName("derecha")[0].appendChild(audio);
+         document.getElementsByClassName("derecha")[0].appendChild(pAudio);
+
+         document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
+      }
+      
+      //Actualizo el nombre de la canción
+      document.getElementById("pTitle").textContent = tituloSong;
+      //Actualizo la canción
+      document.querySelector(".derecha audio").src = `audio/${nombreAudio}.mp3`;
    }
 }
