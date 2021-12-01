@@ -2,72 +2,185 @@
 
     "Preguntas":[
         {
-            "img": "img/Animales/horse.png",
-            "desc": "Horse",
+            "img": "img/Material_escolar/binder.jpg",
+            "desc": "Binder: A hard cover with clasps or rings for holding loose papers together.",
+            "audio": "audio/audios_fonetica/binder.mp3",
+            "phonetic":"/ˈbaɪndər/"
+        },
+        {
+            "img": "img/Material_escolar/board.jpg",
+            "desc": "Board: A flat piece of wood or other hard material used for a purpose.",
+            "audio": "audio/audios_fonetica/board.mp3",
+            "phonetic":"/ˈbɔːrd/"
+        },
+        {
+            "img": "img/Material_escolar/board_eraser.jpg",
+            "desc": "Board Eraser: A tool to erase the blackboard.",
+            "audio": "audio/audios_fonetica/board_eraser.mp3",
+            "phonetic":"/ˈbɔːrd ɪ ˈreɪzər/"
+        },
+        {
+            "img": "img/Material_escolar/bookbag.jpg",
+            "desc": "Bookbag: A bag or satchel used by students for carrying books.",
             "audio": "",
-            "fonetica":""
+            "phonetic":""
         },
         {
-            "img": "img/Animales/cat.png",
-            "desc": "Cat"
+            "img": "img/Material_escolar/book.jpg",
+            "desc": "Book: A number of sheets of paper bound together, for writing, etc.",
+            "audio": "audio/audios_fonetica/book.mp3",
+            "phonetic":"/ˈbʊk/"
         },
         {
-            "img": "img/Animales/dog.jpg",
-            "desc": "Dog"
+            "img": "img/Material_escolar/calculator.jpg",
+            "desc": "Calculator: A small electronic device that performs mathematical calculations.",
+            "audio": "audio/audios_fonetica/calculator.mp3",
+            "phonetic":"/ˈkælkjʊleɪtər/"
         },
         {
-            "img": "img/Animales/lizard.jpg",
-            "desc": "Lizard"
+            "img": "img/Material_escolar/classroom_chair.jpg",
+            "desc": "Classroom chair: A seat, for one person, usually having four legs for support and a rest for the back.",
+            "audio": "audio/audios_fonetica/classroom_chair.mp3",
+            "phonetic":"/ˈklɑːsruːm  tʃɛər/"
         },
         {
-            "img": "img/Animales/tiger.jpg",
-            "desc": "Tiger"
+            "img": "img/Material_escolar/chalk.jpg",
+            "desc": "Chalk: A solid piece of chalk or chalklike substance for marking or writing on a blackboard.",
+            "audio": "audio/audios_fonetica/chalk.mp3",
+            "phonetic":"/ˈtʃɔːk/"
         },
         {
-            "img": "img/Animales/cow.jpg",
-            "desc": "Cow"
+            "img": "img/Material_escolar/classroom.jpg",
+            "desc": "Classroom: A room, as in a school, in which classes are held.",
+            "audio": "audio/audios_fonetica/classroom.mp3",
+            "phonetic":"/ˈklɑːsruːm/"
         },
         {
-            "img": "img/Animales/pig.jpg",
-            "desc": "Pig"
+            "img": "img/Material_escolar/eraser.jpg",
+            "desc": "Eraser: A device, as a piece of rubber or cloth, for erasing marks of pencil, chalk, etc.",
+            "audio": "audio/audios_fonetica/eraser.mp3",
+            "phonetic":"/ɪˈreɪzər/"
         },
         {
-            "img": "img/Animales/parrot.jpg",
-            "desc": "Parrot"
+            "img": "img/Material_escolar/hand_sanitizer.jpg",
+            "desc": "Hand Sanitizier: A substance or preparation for killing germs.",
+            "audio": "",
+            "phonetic":""
         },
         {
-            "img": "img/Animales/giraffe.jpg",
-            "desc": "Giraffe"
+            "img": "img/Material_escolar/highlighter_pen.jpeg",
+            "desc": "Highliter Pen: A felt-tip pen with a wide nib for highlighting passages of printed material in a soft, transparent color.",
+            "audio": "audio/audios_fonetica/highlighter_pen.mp3",
+            "phonetic":"/ˈhaɪlaɪtər ˈpɛn/"
         },
         {
-            "img": "img/Animales/camel.jpg",
-            "desc": "Camel"
+            "img": "img/Material_escolar/keyboard.jpg",
+            "desc": "Keyboard: A set of keys, usually arranged in tiers, for operating a typewriter, typesetting machine, computer terminal, or the like.",
+            "audio": "audio/audios_fonetica/keyboard.mp3",
+            "phonetic":"/ˈkiːbɔːrd/"
         },
         {
-            "img": "img/Animales/bull.jpg",
-            "desc": "Bull"
+            "img": "img/Material_escolar/laptop.jpg",
+            "desc": "Laptop: A portable microcomputer small enough to rest on the lap.",
+            "audio": "audio/audios_fonetica/laptop.mp3",
+            "phonetic":"/ˈlæptɒp/"
         },
         {
-            "img": "img/Animales/donkey.jpg",
-            "desc": "Donkey"
+            "img": "img/Material_escolar/light.jpg",
+            "desc": "Light: Piece of glass in which the vacuum has been made and inside which is placed a thread which when passing an electric current becomes incandescent and serves to illuminate.",
+            "audio": "audio/audios_fonetica/light.mp3",
+            "phonetic":"/ˈlaɪt/"
         },
         {
-            "img": "img/Animales/rabbit.jpg",
-            "desc": "Rabbit"
+            "img": "img/Material_escolar/mechanical_pencil.jpg",
+            "desc": "Mechanical Pencil: A pencil for holding graphite that can be extended by mechanical means.",
+            "audio": "audio/audios_fonetica/mechanical_pencil.mp3",
+            "phonetic":"/mɪˈkænɪkəl ˈpɛnsəl/"
         },
         {
-            "img": "img/Animales/whale.jpg",
-            "desc": "Whale"
+            "img": "img/Material_escolar/mouse.png",
+            "desc": "Mouse: A palm-sized device equipped with one or more buttons, used to point at and select items on a computer display screen and to control the movement of the cursor.",
+            "audio": "audio/audios_fonetica/mouse.mp3",
+            "phonetic":"/ˈmaʊs/"
         },
         {
-            "img": "img/Animales/octopus.jpg",
-            "desc": "Octopus"
+            "img": "img/Material_escolar/notebook.jpg",
+            "desc": "Notebook: A book of or for notes and other writing, a book or binder of blank pages with straight lines in it.",
+            "audio": "audio/audios_fonetica/notebook.mp3",
+            "phonetic":"/ˈnəʊtbʊk/"
         },
         {
-            "img": "img/Animales/otter.jpg",
-            "desc": "Otter"
+            "img": "img/Material_escolar/paper_bin.jpg",
+            "desc": "Paper Bin: Container to throw papers, tissues, etc .",
+            "audio": "audio/audios_fonetica/paper_bin.mp3",
+            "phonetic":"/ˈpeɪpər ˈbɪn/"
+        },
+        {
+            "img": "img/Material_escolar/paperclip.jpg",
+            "desc": "Paperclip: A clip for holding sheets of paper together, one made of bent wire.",
+            "audio": "audio/audios_fonetica/paper_clip.mp3",
+            "phonetic":"/ˈpeɪpər  ˈklɪp/"
+        },
+        {
+            "img": "img/Material_escolar/pen.jpg",
+            "desc": "Pen: Instruments for writing or drawing with ink.",
+            "audio": "audio/audios_fonetica/pen.mp3",
+            "phonetic":"/ˈpɛn/"
+        },
+        {
+            "img": "img/Material_escolar/pencil.jpg",
+            "desc": "Pencil: A slender tube of wood, metal, etc., containing a thin piece of graphite, used for writing or drawing.",
+            "audio": "audio/audios_fonetica/pencil.mp3",
+            "phonetic":""
+        },
+        {
+            "img": "img/Material_escolar/pencil_case.jpg",
+            "desc": "Pencil Case: Container to store pencils, pens, rulers, etc.",
+            "audio": "audio/audios_fonetica/pencil_case.mp3",
+            "phonetic":"/ˈpɛnsəl  keɪs/"
+        },
+        {
+            "img": "img/Material_escolar/pencil_sharpener.jpg",
+            "desc": "Pencil Sharpener:  Object to sharpen a pencil.",
+            "audio": "audio/audios_fonetica/pencil_sharpener.mp3",
+            "phonetic":"/ˈpɛnsəl ʃɑːrpənər/"
+        },
+        {
+            "img": "img/Material_escolar/ruler.jpg",
+            "desc": "Ruler: To mark with lines, parallel straight lines, with the aid of a ruler.",
+            "audio": "audio/audios_fonetica/ruler.mp3",
+            "phonetic":"/ˈruːlər/"
+        },
+        {
+            "img": "img/Material_escolar/school.jpg",
+            "desc": "School: A place for teaching people under age.",
+            "audio": "audio/audios_fonetica/school.mp3",
+            "phonetic":"/ˈskuːl/"
+        },
+        {
+            "img": "img/Material_escolar/scissor.jpg",
+            "desc": "Scissors: A cutting instrument for paper, etc., made of two blades so fastened together at the center that their sharp edges work one against the other while cutting.",
+            "audio": "audio/audios_fonetica/scissor.mp3",
+            "phonetic":"/ˈsɪzərz/"
+        },
+        {
+            "img": "img/Material_escolar/teacher.jpg",
+            "desc": "Teacher: One who teaches,  as a profession.",
+            "audio": "audio/audios_fonetica/teacher.mp3",
+            "phonetic":"/ˈtiːtʃər/"
+        },
+        {
+            "img": "img/Material_escolar/uniform.jpg",
+            "desc": "Uniform: Dress of distinctive style worn by the members of a given profession, organization, rank, or even school.",
+            "audio": "audio/audios_fonetica/uniform.mp3",
+            "phonetic":"/ˈjuːnɪfɔːrm/"
+        },
+        {
+            "img": "img/Material_escolar/window.jpg",
+            "desc": "Windows: An opening in a building, vehicle, etc., for letting in air or light.",
+            "audio": "audio/audios_fonetica/window.mp3",
+            "phonetic":"/ˈwɪndəʊ/"
         }
-
     ]  
 
 }
