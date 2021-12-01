@@ -105,20 +105,33 @@ export class Controlador {
 
         let buttonRnd = document.createElement("button");
         buttonRnd.textContent = "Generar canción";
-        buttonRnd.onclick = function() { crearSong(); };
+        buttonRnd.onclick = this.crearSong.bind(this);
 
-        let pAudio = document.createElement("p");
-        pAudio.textContent = rndSong[0];
+        //Inicio variables de bloque
+        let pAudio = null;
+        let audio = null;
 
-        let audio = document.createElement("audio");
-        audio.controls = "controls autoplay";
-        audio.type = 'audio/mpeg';
-        audio.src = `audio/${rndSong[1]}.mp3`;
+        //Si no existe el elemento P, entonces lo creamos.
+        if(!document.querySelector(".derecha p")){
+            pAudio = document.createElement("p");
+            pAudio.id ="pTitle";
+           
 
-        document.getElementsByClassName("derecha")[0].appendChild(audio);
-        document.getElementsByClassName("derecha")[0].appendChild(pAudio);
+            audio = document.createElement("audio");
+            audio.controls = "controls autoplay";
+            audio.type = 'audio/mpeg';
+            
 
-        document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
+            document.getElementsByClassName("derecha")[0].appendChild(audio);
+            document.getElementsByClassName("derecha")[0].appendChild(pAudio);
+
+            document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
+        }
+        
+        //Actualizo el nombre de la canción
+        document.getElementById("pTitle").textContent = rndSong[0];
+        //Actualizo la canción
+        document.querySelector(".derecha audio").src = `audio/${rndSong[1]}.mp3`;
     }
 
     //API musica, 
