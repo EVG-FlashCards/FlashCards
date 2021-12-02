@@ -340,4 +340,4 @@ export class Controlador {
     }
 }
 
-var app = new Controlador();
+let app = new Controlador();
