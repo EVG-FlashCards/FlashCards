@@ -16,13 +16,16 @@ export class Controlador {
         this.vista = new Vista();
         this.modelo = new Modelo();
 
+        //Le paso el modelo a vista.
+        this.vista.modelo = this.modelo;
+
         this.darkMode = true;
         this.desc = false;
         this.fonetica = false;
         this.stringJson = null;
         this.pDescripcion = "";
         this.pFonetica = "";
-        this.idPregunta = 20;
+        this.idPregunta = 0;
 
         this.team1Selected = null;
         this.otherGameMode = ''; //Otro modo de juego, como el modo de 'Audio', por ejemplo.
@@ -62,12 +65,21 @@ export class Controlador {
         } 
         else this.modoJuegoIndividual = true;
 
-        //Apaño rápido...
+        //Apaño a lo rápido, verifico que estoy en el modo audio y evito cargar métodos innecesarios...
        if(document.querySelector("[data-audio=itsAudio]")) {
-           this.otherGameMode='a';
-           
-            this.crearSong();
+            this.otherGameMode='a';
 
+            //Animación mouse-in mouse-out de las letras.
+            this.lyrics();
+
+            //Especifico las canciones
+            let rndSong = this.modelo.cancionesAleatorias();
+
+            //Genero las letras de la canción
+            this.modelo.getLyrics(rndSong[0], rndSong[1]);
+           
+            //Creación de interfaz.
+            this.vista.crearSong(rndSong[0], rndSong[1]);
        }
 
         //Establezco en el modelo el modo de juego en el que estamos.
@@ -80,87 +92,9 @@ export class Controlador {
         //Inicio de los clicks.
         window.onclick = this.clicks.bind(this);
 
-        if(this.obtCookie("ciclos") == "false") {
-            //this.vista.darkMode = this.obtCookie("ciclos");
+        if(this.modelo.obtCookie("ciclos") == "false") {
             this.vista.ciclosWeb();
         }
-    }
-
-    crearSong() {
-        this.lyrics();
-
-        //cargar las letras rnd
-
-        this.arraySongs = [
-            ["Christina Aguilera","Beautiful"],
-            ["Imagine Dragons","Radioactive"],
-            ["Nathan Evans", "Wellerman (Sea Shanty)"]
-        ];
-
-        let rndSong = this.arraySongs[Math.floor(Math.random()*this.arraySongs.length)];
-
-        this.getLyrics(rndSong[0],rndSong[1]);
-
-        //Cargar las canciones rnd.
-
-        let buttonRnd = document.createElement("button");
-        buttonRnd.textContent = "Generar canción";
-        buttonRnd.onclick = function() { crearSong(); };
-
-        let pAudio = document.createElement("p");
-        pAudio.textContent = rndSong[0];
-
-        let audio = document.createElement("audio");
-        audio.controls = "controls autoplay";
-        audio.type = 'audio/mpeg';
-        audio.src = `audio/${rndSong[1]}.mp3`;
-
-        document.getElementsByClassName("derecha")[0].appendChild(audio);
-        document.getElementsByClassName("derecha")[0].appendChild(pAudio);
-
-        document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
-    }
-
-    //API musica, 
-    async getLyrics(artist, songTitle) {
-        let apiURL = "https://api.lyrics.ovh";
-        const response = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
-        const data = await response.json();
-    
-        const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
-    
-        //Actualizo el div
-        document.getElementsByClassName("auto")[0].innerHTML = `<h2><strong>${artist}</strong> - ${songTitle}</h2>
-        <p>${lyrics}</p>`;
-
-    }
-
-    /**
-   * Devuelve el valor de una cookie si la encuentra.
-   * @param {String} username 
-   * @returns - Cadena
-   */
-    obtCookie(username) {
-        let nomb = username+"=";
-        //Pasa la cookie a string
-        let cookieDecoded = decodeURIComponent(document.cookie);
-        let array = cookieDecoded.split(";");
-  
-        //Recorremos el array
-        for(let i=0;i<array.length;i++) {
-           let c = array[i];
-           //Recorre hasta que encuentre un espacio
-           while(c.charAt(0) == " ") {
-                 c.substring(1);//Vamos quitando los espacios si los hay.
-           }
-           //Comprobamos si lo ha encontrado.
-           if(c.indexOf(nomb)==0){
-                 return c.substring(nomb.length,c.length);
-           }
-        }
-        //No encontró nada, así que devolvemos vacio.
-        console.log("No se pudo obtener la cookie con nombre: "+nomb);
-        return "";
     }
 
     /**
@@ -170,20 +104,9 @@ export class Controlador {
         if (document.getElementsByClassName("auto")) {
             let autos = document.getElementsByClassName("auto");
 
-            for (let i=0; i<autos.length; i++) {
-                autos[i].addEventListener("mouseover", this.autoOver);
-                autos[i].addEventListener("mouseout", this.autoOut);
-            }
+            autos[0].addEventListener("mouseover", () => autos[0].style.height = autos[0].scrollHeight + "px");
+            autos[0].addEventListener("mouseout", () => autos[0].style.height = "20px");
         }
-    }
-
-    /* Método que comprueba que el ratón esté dentro*/
-    autoOver() {
-        this.style.height = this.scrollHeight + "px";
-    }
-    /** Método que comprueba que el ratón se haya salido */
-    autoOut() {
-        this.style.height = "20px";
     }
     
     /**
@@ -299,7 +222,7 @@ export class Controlador {
                 this.pFonetica.id = "pFonetica";
     
                 
-                this.pFonetica.appendChild(document.createTextNode("e"));
+                this.pFonetica.appendChild(document.createTextNode(this.stringJson.Preguntas[this.idPregunta].phonetic));
     
                 document.getElementById("imgEDesc").appendChild(this.pFonetica);
     
@@ -417,4 +340,4 @@ export class Controlador {
     }
 }
 
-var app = new Controlador();
+let app = new Controlador();
