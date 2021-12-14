@@ -3,9 +3,11 @@
  * @author Angel Manuel Fernandez, Juan Diego Carretero, Sergio Matamoros   Delgado, Jose Angel Fernandez
  * @license GPL v3 2021
  * @description Proyecto Flash Cards.
- * 
- * Clase Modelo del juego.
 */
+
+/**
+ * Clase Modelo del juego.
+ */
 export class Modelo {
     constructor() {
         this.team1Selected = null;
@@ -110,7 +112,7 @@ export class Modelo {
      * @param {String} artist  -> Nombre del artista
      * @param {String} songTitle  -> Nombre de la canción.
     */
-     async getLyrics(artist, songTitle) {
+    async getLyrics(artist, songTitle) {
         let apiURL = "https://api.lyrics.ovh";
         const response = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
         const data = await response.json();

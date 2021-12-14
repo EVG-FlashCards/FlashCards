@@ -3,9 +3,11 @@
  * @author Angel Manuel Fernandez, Juan Diego Carretero, Sergio Matamoros   Delgado, Jose Angel Fernandez
  * @license GPL v3 2021
  * @description Proyecto Flash Cards.
- * 
- * Clase Vista del juego.
 */
+
+/**
+ * Clase Vista del juego.
+ */
 export class Vista {
 
    constructor() {
@@ -16,14 +18,14 @@ export class Vista {
    } 
    /**
     * Método que crea un 'pop up' y comprueba si existe ya uno, de existir unicamente lo muestra 
-    * == Método OBSOLETO == (¿¿ REUTILIZABLE ??)
+    * <br> == Método OBSOLETO == (¿¿ REUTILIZABLE ??)
    */
    popup() {
 
       //Si score existe no lo volvemos a crear, solo mostramos
       if(document.getElementById("score"))
          document.getElementsByClassName("popup")[0].style.display = "block";
-      else{
+      else {
 
          //Mostramos el pop up
          document.getElementsByClassName("popup")[0].style.display = "block";

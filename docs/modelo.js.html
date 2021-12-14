@@ -31,9 +31,11 @@
  * @author Angel Manuel Fernandez, Juan Diego Carretero, Sergio Matamoros   Delgado, Jose Angel Fernandez
  * @license GPL v3 2021
  * @description Proyecto Flash Cards.
- * 
- * Clase Modelo del juego.
 */
+
+/**
+ * Clase Modelo del juego.
+ */
 export class Modelo {
     constructor() {
         this.team1Selected = null;
@@ -43,7 +45,6 @@ export class Modelo {
         this.modoJuegoIndividual = null; //entra de controlador.
 
         this.totalScore = document.getElementById("totalScore");
-
     }
 
     /**
@@ -57,26 +58,26 @@ export class Modelo {
             if(this.team1Selected) {
                 this.puntuacionT1++;
 
-                this.modoJuegoIndividual ? this.totalScore.textContent = this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
+                this.modoJuegoIndividual ? this.totalScore.textContent = "Puntos: "+this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
 
                 console.log(this.puntuacionT1);
             } 
             else { 
                 this.puntuacionT2++;
 
-                this.modoJuegoIndividual ? this.totalScore.textContent = this.puntuacionT2 : sTeam2.textContent = this.puntuacionT2;
+                this.modoJuegoIndividual ? this.totalScore.textContent = "Puntos: "+this.puntuacionT2 : sTeam2.textContent = this.puntuacionT2;
 
             }
         } else if(esSuma === false) { //Revisar lo de !esSuma
             if(this.team1Selected) { 
                 this.puntuacionT1 = this.puntuacionT1-1;
-                this.modoJuegoIndividual ? this.totalScore.textContent = this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
+                this.modoJuegoIndividual ? this.totalScore.textContent = "Puntos: "+this.puntuacionT1 : sTeam1.textContent = this.puntuacionT1;
 
             }
             else { 
                 this.puntuacionT2 = this.puntuacionT2-1;
 
-                this.modoJuegoIndividual ? totalScore.textContent = this.puntuacionT2 : sTeam2.textContent = this.puntuacionT2;
+                this.modoJuegoIndividual ? totalScore.textContent = "Puntos: "+this.puntuacionT2 : sTeam2.textContent = this.puntuacionT2;
 
             }
         }
@@ -90,6 +91,67 @@ export class Modelo {
             return puntuacionT1+puntuacionT2;*/
         }
     }
+
+    /**
+     * Devuelve el valor de una cookie si la encuentra.
+     * @param {String} username 
+     * @returns - Cadena
+    */
+    obtCookie(username) {
+        let nomb = username+"=";
+        //Pasa la cookie a string
+        let cookieDecoded = decodeURIComponent(document.cookie);
+        let array = cookieDecoded.split(";");
+  
+        //Recorremos el array
+        for(let i=0;i&lt;array.length;i++) {
+           let c = array[i];
+           //Recorre hasta que encuentre un espacio
+           while(c.charAt(0) == " ") {
+                 c.substring(1);//Vamos quitando los espacios si los hay.
+           }
+           //Comprobamos si lo ha encontrado.
+           if(c.indexOf(nomb)==0){
+                 return c.substring(nomb.length,c.length);
+           }
+        }
+        //No encontró nada, así que devolvemos vacio.
+        console.log("No se pudo obtener la cookie con nombre: "+nomb);
+        return "";
+    }
+
+    /**
+     * Método que te devuelve una canción aleatoria.
+     * @returns Array con el nombre del artista y nombre de cancion
+    */
+    cancionesAleatorias() {
+        this.arraySongs = [
+            ["Christina Aguilera","Beautiful"],
+            ["Imagine Dragons","Radioactive"],
+            ["Nathan Evans", "Wellerman (Sea Shanty)"]
+        ];
+
+        //Elijo una canción aleatoriamente
+        return this.arraySongs[Math.floor(Math.random()*this.arraySongs.length)];
+    }
+
+    /**
+     * API que recoge la letra de una canción especificada
+     * @param {String} artist  -> Nombre del artista
+     * @param {String} songTitle  -> Nombre de la canción.
+    */
+    async getLyrics(artist, songTitle) {
+        let apiURL = "https://api.lyrics.ovh";
+        const response = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
+        const data = await response.json();
+    
+        const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '&lt;br>');
+    
+        //Actualizo el div
+        document.getElementsByClassName("auto")[0].innerHTML = `&lt;h2>&lt;strong>${artist}&lt;/strong> - ${songTitle}&lt;/h2>
+        &lt;p>${lyrics}&lt;/p>`;
+
+    }
 }</code></pre>
         </article>
     </section>
@@ -100,13 +162,13 @@ export class Modelo {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#botonesCheck">botonesCheck</a></li><li><a href="global.html#cargar">cargar</a></li><li><a href="global.html#ciclosWeb">ciclosWeb</a></li><li><a href="global.html#clicks">clicks</a></li><li><a href="global.html#iniciar">iniciar</a></li><li><a href="global.html#lyrics">lyrics</a></li><li><a href="global.html#popup">popup</a></li><li><a href="global.html#sumarPuntos">sumarPuntos</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controlador.html">Controlador</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Vista.html">Vista</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Nov 24 2021 16:10:50 GMT+0100 (hora estándar de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Dec 14 2021 10:41:17 GMT+0100 (hora estándar de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

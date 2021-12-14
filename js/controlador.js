@@ -1,14 +1,16 @@
-import { Vista } from "./vista.js";
-import { Modelo } from "./modelo.js";
-
 /**
  * @file Controlador principal de FlashCards
  * @author Angel Manuel Fernandez, Juan Diego Carretero, Sergio Matamoros   Delgado, Jose Angel Fernandez
  * @license GPL v3 2021
  * @description Proyecto Flash Cards.
- * 
- * Clase controladora principal del juego.
 */
+
+import { Vista } from "./vista.js";
+import { Modelo } from "./modelo.js";
+
+/**
+ *  Clase controladora principal del juego.
+ */
 export class Controlador {
 
     constructor() {

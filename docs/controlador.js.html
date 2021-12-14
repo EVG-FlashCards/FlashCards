@@ -34,15 +34,20 @@ import { Modelo } from "./modelo.js";
  * @author Angel Manuel Fernandez, Juan Diego Carretero, Sergio Matamoros   Delgado, Jose Angel Fernandez
  * @license GPL v3 2021
  * @description Proyecto Flash Cards.
- * 
- * Clase controladora principal del juego.
 */
+
+/**
+ *  Clase controladora principal del juego.
+ */
 export class Controlador {
 
     constructor() {
 
         this.vista = new Vista();
         this.modelo = new Modelo();
+
+        //Le paso el modelo a vista.
+        this.vista.modelo = this.modelo;
 
         this.darkMode = true;
         this.desc = false;
@@ -53,10 +58,19 @@ export class Controlador {
         this.idPregunta = 0;
 
         this.team1Selected = null;
+        this.otherGameMode = ''; //Otro modo de juego, como el modo de 'Audio', por ejemplo.
 
         this.totalScore = document.getElementById("totalScore");
         this.puntuacionT1 = 0;
         this.puntuacionT2 = 0;
+
+        //Cookie
+        this.fechaCaducidad = new Date();
+
+        //Establecemos que caduque en 30 días a partir de hoy.
+        this.fechaCaducidad.setDate(this.fechaCaducidad.getDate()+30);
+
+        //Fin cookie
 
         this.modoJuegoIndividual = null;
 
@@ -81,17 +95,36 @@ export class Controlador {
         } 
         else this.modoJuegoIndividual = true;
 
+        //Apaño a lo rápido, verifico que estoy en el modo audio y evito cargar métodos innecesarios...
+       if(document.querySelector("[data-audio=itsAudio]")) {
+            this.otherGameMode='a';
+
+            //Animación mouse-in mouse-out de las letras.
+            this.lyrics();
+
+            //Especifico las canciones
+            let rndSong = this.modelo.cancionesAleatorias();
+
+            //Genero las letras de la canción
+            this.modelo.getLyrics(rndSong[0], rndSong[1]);
+           
+            //Creación de interfaz.
+            this.vista.crearSong(rndSong[0], rndSong[1]);
+       }
+
         //Establezco en el modelo el modo de juego en el que estamos.
         this.modelo.modoJuegoIndividual = this.modoJuegoIndividual;
 
         //Cargamos los datos.
-        this.cargar();
-    
-        //Tiempo de espera hasta que se carguen los datos del JSON.
-        setTimeout(() => {
-            //Carga la imagen principal.
-            document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[0].img;
-        }, 200);
+        if(this.otherGameMode == '')
+            this.cargar();
+
+        //Inicio de los clicks.
+        window.onclick = this.clicks.bind(this);
+
+        if(this.modelo.obtCookie("ciclos") == "false") {
+            this.vista.ciclosWeb();
+        }
     }
 
     /**
@@ -101,35 +134,35 @@ export class Controlador {
         if (document.getElementsByClassName("auto")) {
             let autos = document.getElementsByClassName("auto");
 
-            for (let i=0; i&lt;autos.length; i++) {
-                autos[i].addEventListener("mouseover", autoOver);
-                autos[i].addEventListener("mouseout", autoOut);
-            }
+            autos[0].addEventListener("mouseover", () => autos[0].style.height = autos[0].scrollHeight + "px");
+            autos[0].addEventListener("mouseout", () => autos[0].style.height = "20px");
         }
-    }
-
-    /* Método que comprueba que el ratón esté dentro*/
-    autoOver() {
-        this.style.height = this.scrollHeight + "px";
-    }
-    /** Método que comprueba que el ratón se haya salido */
-    autoOut() {
-        this.style.height = "20px";
     }
     
     /**
      * Inicia los clicks a los botones y carga el JSON y lo añade a @var stringJson
      */
-    cargar() {
-        fetch ('./js/preguntas.json')
-        .then(respuesta => respuesta.json())
-        .then(preguntas => this.stringJson = preguntas)
-        .catch( r => window.location.reload()); 
-    
-        //CAMBIAR LOS CLICKS.
-        window.onclick = this.clicks.bind(this);
+    async cargar() {
+        let promesa = new Promise(function(correcto,incorrecto) { 
 
-    
+
+            fetch ('./js/preguntas.json')
+            .then(respuesta => respuesta.json())
+            .then(preguntas => correcto(preguntas))
+            .catch(r => incorrecto("Error en: "+r));
+        });
+
+        //Carga la primera imagen
+        try {
+            //Espera a que los datos esten listos.
+            await promesa.then(r => this.stringJson = r)
+            .catch(r => console.log("Se produjo una excepción: "+r));
+
+            document.querySelector("div#imgEDesc > img").src = this.stringJson.Preguntas[0].img;
+
+        } catch(err) {
+            console.error(err);
+        }
     }
     
     /**
@@ -142,6 +175,8 @@ export class Controlador {
         //Click en botón de ciclos
         if(event.target.id == "btnNodes") {
             this.vista.ciclosWeb();
+            //actualizo la cookie para guardar en el último modo en el que entró
+            document.cookie = `ciclos=${this.vista.darkMode};expires=${this.fechaCaducidad}`;
         }
 
         if(event.target.classList == "chooseTeam1" || event.target.classList == "chooseTeam2") {
@@ -171,6 +206,7 @@ export class Controlador {
     
         //Click en botón de descripción
         if(event.target.id == "desc") {
+            if(this.fonetica) return;
     
             if(!this.desc) {
                 console.log("Click en descripción.");
@@ -204,6 +240,8 @@ export class Controlador {
         
         //Click en botón de fonetica
         if(event.target.id == "phonetics") {
+            if(this.desc) return;
+
             if(!this.fonetica) {
                 console.log("Click en fonética");
                 //Activamos la variable
@@ -214,7 +252,7 @@ export class Controlador {
                 this.pFonetica.id = "pFonetica";
     
                 
-                this.pFonetica.appendChild(document.createTextNode("e"));
+                this.pFonetica.appendChild(document.createTextNode(this.stringJson.Preguntas[this.idPregunta].phonetic));
     
                 document.getElementById("imgEDesc").appendChild(this.pFonetica);
     
@@ -294,10 +332,10 @@ export class Controlador {
             if(event.target.id == "btnCorrect" ) {
                 console.log("Click en Correcto");
     
-                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
-
                 //Pasamos a la siguiente pregunta
                 this.idPregunta++;
+
+                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
 
                 this.modelo.sumarPuntos(true);
 
@@ -313,12 +351,11 @@ export class Controlador {
             //Click en botón de incorrecto
             if(event.target.id == "btnIncorrect") {
                 console.log("Click en Incorrecto");
-            
-                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
-    
+                
                 //Pasamos a la siguiente pregunta
                 this.idPregunta++;
-    
+
+                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
                 
                 this.modelo.sumarPuntos(false);
     
@@ -332,7 +369,7 @@ export class Controlador {
     }
 }
 
-var app = new Controlador();</code></pre>
+let app = new Controlador();</code></pre>
         </article>
     </section>
 
@@ -342,13 +379,13 @@ var app = new Controlador();</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#botonesCheck">botonesCheck</a></li><li><a href="global.html#cargar">cargar</a></li><li><a href="global.html#ciclosWeb">ciclosWeb</a></li><li><a href="global.html#clicks">clicks</a></li><li><a href="global.html#iniciar">iniciar</a></li><li><a href="global.html#lyrics">lyrics</a></li><li><a href="global.html#popup">popup</a></li><li><a href="global.html#sumarPuntos">sumarPuntos</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Controlador.html">Controlador</a></li><li><a href="Modelo.html">Modelo</a></li><li><a href="Vista.html">Vista</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Nov 24 2021 16:10:50 GMT+0100 (hora estándar de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Dec 14 2021 10:41:17 GMT+0100 (hora estándar de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>
