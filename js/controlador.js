@@ -302,10 +302,10 @@ export class Controlador {
             if(event.target.id == "btnCorrect" ) {
                 console.log("Click en Correcto");
     
-                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return; //REVISAR *******
-
                 //Pasamos a la siguiente pregunta
                 this.idPregunta++;
+
+                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
 
                 this.modelo.sumarPuntos(true);
 
@@ -321,12 +321,11 @@ export class Controlador {
             //Click en botón de incorrecto
             if(event.target.id == "btnIncorrect") {
                 console.log("Click en Incorrecto");
-            
-                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
-    
+                
                 //Pasamos a la siguiente pregunta
                 this.idPregunta++;
-    
+
+                if(this.stringJson.Preguntas[this.idPregunta] == undefined) return;
                 
                 this.modelo.sumarPuntos(false);
     
