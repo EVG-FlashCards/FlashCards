@@ -10,7 +10,22 @@ body {
 }
 
 #enlacesTeams {
-    margin-left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-color: #2e3440;
+    border-radius: 10px;
+    color: white;
+}
+
+#enlacesTeams > a:hover {
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+#enlacesTeams > a:visited, a:link {
+    color: white;
 }
 
 
