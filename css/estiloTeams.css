@@ -12,22 +12,24 @@ body {
 #enlacesTeams {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     gap: 30px;
-    background-color: #2e3440;
+    color: white;
+    font-size: 2rem;
+    margin-top: 70px;
+}
+
+#enlacesTeams > a {
     border-radius: 10px;
-    color: white;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: 1.5s;
+    text-shadow: 1px 3px 0 #4c87f5, 1px 13px 5px #c0c0c0;
 }
-
 #enlacesTeams > a:hover {
-    padding-right: 10px;
-    font-weight: bold;
+    filter: hue-rotate(90deg);
+    background: #eeeeee85;
 }
-
-#enlacesTeams > a:visited, a:link {
-    color: white;
-}
-
 
 /*  
     ========================================================

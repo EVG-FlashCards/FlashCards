@@ -115,7 +115,10 @@ export class Vista {
 
       //Cargar las canciones rnd.
       let buttonRnd = document.createElement("button");
-      buttonRnd.textContent = "Canción aleatoria";
+      let span = document.createElement("span");
+      buttonRnd.classList.add("buttonAl");
+      buttonRnd.appendChild(span);
+      span.textContent = "Canción Aleatoria"
       buttonRnd.onclick = () => {
 
          let arrayCancion = this.modelo.cancionesAleatorias();//this.crearSong.bind(this);
@@ -144,10 +147,10 @@ export class Vista {
          audio.controls = "controls autoplay";
          audio.type = 'audio/mpeg';
 
+         document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
          document.getElementsByClassName("derecha")[0].appendChild(audio);
          document.getElementsByClassName("derecha")[0].appendChild(pAudio);
 
-         document.getElementsByClassName("derecha")[0].appendChild(buttonRnd);
       }
       
       //Actualizo el nombre de la canción
